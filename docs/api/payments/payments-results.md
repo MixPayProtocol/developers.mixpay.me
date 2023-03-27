@@ -23,7 +23,7 @@ https://api.mixpay.me/v1/payments_result
 | --- | --- | --- | --- |
 | `traceId` | <span class="required">*required</span> if no `orderId` | String | Trace Id of payments. |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. |
-| `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving money, pls see [Three types of account](/developers/guides/integration-verview#three-types-of-account) and [How to get payeeId](/developers/guides/integration-verview#payee-id). |
+| `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving money, pls see [Three types of account](/guides/integration-verview#three-types-of-account) and [How to get payeeId](/guides/integration-verview#payee-id). |
 
 ## Example request - GET payment results.
 
@@ -137,7 +137,7 @@ if ($payment_result["success"]) {
 :::
 
 
-> Please checkout the [Security Guidelines](/developers/guides/security-guidelines).
+> Please checkout the [Security Guidelines](/guides/security-guidelines).
 
 ## Checking for failure
 

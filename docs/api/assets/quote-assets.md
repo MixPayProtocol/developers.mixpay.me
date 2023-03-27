@@ -16,9 +16,9 @@ https://api.mixpay.me/v1/setting/quote_assets
 
 ### `payeeId` | optional | String
 
-Account ID for receiving money, pls see [Three types of account](/developers/guides/integration-verview#three-types-of-account) and [How to get payeeId](/developers/guides/integration-verview#payee-id).
+Account ID for receiving money, pls see [Three types of account](/guides/integration-verview#three-types-of-account) and [How to get payeeId](/guides/integration-verview#payee-id).
 
-If you want to use a specified crypto asset we not yet publiclly supported, you can [contact our customer service](/developers/guides/contact-customer-service) and use this parameter to fetch your exclusive customized quote assets.
+If you want to use a specified crypto asset we not yet publiclly supported, you can [contact our customer service](/guides/contact-customer-service) and use this parameter to fetch your exclusive customized quote assets.
 
 ## Example request - Get Quote Assets
 

@@ -32,9 +32,9 @@ Open the MixPay App in the Mixin App, click the "Payment History" entry like bel
 
 ## Three types of assets
 
-- [Payment Assets](/developers/api/assets/payment-assets) - Used when you create a payment;
-- [Quote Assets](/developers/api/assets/quote-assets) - When you calculate the total payment amount and show it to the customers.
-- [Settlement Assets](/developers/api/assets/settlement-assets) - Used when you are setting the payee settlement assets;
+- [Payment Assets](/api/assets/payment-assets) - Used when you create a payment;
+- [Quote Assets](/api/assets/quote-assets) - When you calculate the total payment amount and show it to the customers.
+- [Settlement Assets](/api/assets/settlement-assets) - Used when you are setting the payee settlement assets;
 
 ## Three types of account
 
@@ -47,7 +47,7 @@ MixPay supports three types of accounts:
 
 - Mixin Robot account - [Mixin's Messenger Bot](https://developers.mixin.one/docs/dapp/mixin-applications#messenger-bot) it's programmable, thus, is more flexible; this is for more advanced users.
 
-If you don't know how to choose, you can go with the "User account", or [contact our customer service](/developers/guides/contact-customer-service).
+If you don't know how to choose, you can go with the "User account", or [contact our customer service](/guides/contact-customer-service).
 
 ## Payee ID
 
@@ -59,18 +59,18 @@ There are two ways of getting the payee's UUID:
 
 - You can use this bot (7000101422) to get the Mixin User/Robot UUID, send the Mixin ID in the chat window to the bot, and it will reply with the corresponding UUID. It's simple, and no programming is required.
 
-- Also, if the user UUID you want to acquire is a MixPay user, you can quickly get this UUID via [Get Mixin UUID API](/developers/api/users/get-mixin-uuid).
+- Also, if the user UUID you want to acquire is a MixPay user, you can quickly get this UUID via [Get Mixin UUID API](/api/users/get-mixin-uuid).
 
 
 ## How to integrate? 
 
 There are several ways you can integrate MixPay to accept crypto payments:
 
-1. [Paylink](/developers/guides/using-paylink) -  MixPay hosted web page; all user interaction happened on this page; you can use it as a "Pay with Crypto" button.
-2. [JS Plugin](/developers/guides/shopify-plugin) -  Like Paylink to handle all user payment close interaction, but on your web page, you can have more control over it.
-3. [Raw API call](/developers/guides/using-raw-api) - Above to method are in the browser; if you are in the circumstance that can't use the browser, maybe this is your choice.
-4. [Shopify Plugin](/developers/guides/shopify-plugin).
-5. [WordPress WooCommerce Plugin](/developers/guides/woocommerce-plugin).
+1. [Paylink](/guides/using-paylink) -  MixPay hosted web page; all user interaction happened on this page; you can use it as a "Pay with Crypto" button.
+2. [JS Plugin](/guides/shopify-plugin) -  Like Paylink to handle all user payment close interaction, but on your web page, you can have more control over it.
+3. [Raw API call](/guides/using-raw-api) - Above to method are in the browser; if you are in the circumstance that can't use the browser, maybe this is your choice.
+4. [Shopify Plugin](/guides/shopify-plugin).
+5. [WordPress WooCommerce Plugin](/guides/woocommerce-plugin).
 
 Here is just a brief of the integration method available; for more detailed instructions, please visit the doc entry at the left menu.
 

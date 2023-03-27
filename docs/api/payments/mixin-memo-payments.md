@@ -18,8 +18,8 @@ SOURCE|PAYEE|SETTLEMENTASSETID
 |  Param | Optional | Description |
 | --- | --- | --- |
 | SOURCE | <span class="required">*required</span> | Must be `swap` |
-| PAYEE | <span class="required">*required</span> | The payee ID. Please refer to the [Three types of accounts](/developers/guides/integration-verview#three-types-of-account) and [how to get a payee ID](/developers/guides/integration-verview#payee-id). |
-| SETTLEMENTASSETID | <span class="required">*required</span> | Receipt crypto. [Here](/developers/api/assets/settlement-assets) you can see the settlement cryptos supported by MixPay. |
+| PAYEE | <span class="required">*required</span> | The payee ID. Please refer to the [Three types of accounts](/guides/integration-verview#three-types-of-account) and [how to get a payee ID](/guides/integration-verview#payee-id). |
+| SETTLEMENTASSETID | <span class="required">*required</span> | Receipt crypto. [Here](/api/assets/settlement-assets) you can see the settlement cryptos supported by MixPay. |
 
 For example: 
 
@@ -37,4 +37,4 @@ Then you can use Mixin to transfer crypto to MixPay.
 
 ## Refunding
 
-MixPay will return the cryptos to the payer's Mixin account when the transaction fails. We will attach the reason code in the transaction [memo](/developers/api/memo#memo-specification). Please see [here](/developers/api/error-codes#reason-for-refund) for details.
+MixPay will return the cryptos to the payer's Mixin account when the transaction fails. We will attach the reason code in the transaction [memo](/api/memo#memo-specification). Please see [here](/api/error-codes#reason-for-refund) for details.

@@ -3,7 +3,7 @@
 When creating a payment, you can pass a `callbackUrl` parameter to the MixPay API. 
 
 
-> Please checkout the [Security Guidelines](/developers/guides/security-guidelines) first.
+> Please checkout the [Security Guidelines](/guides/security-guidelines) first.
 
 When creating a payment, you can pass a `callbackUrl` parameter to the API. 
 
@@ -32,7 +32,7 @@ After payment successfully, MixPay will issue a POST request to this URL, with t
 When your callback endpoint receives a call, you MUST do the following checks:
 
 - First, in your database, look for the incoming `orderId` or `traceId` value. **This step is essential, be careful anyone can post a fake value to your endpoint**;
-- Call the [payments-results API](/developers/api/payments/payments-results), and check for `data.status` field to be `success`;
+- Call the [payments-results API](/api/payments/payments-results), and check for `data.status` field to be `success`;
 - Check the `data.payeeId` is yours;
 - Check the `data.quoteAmount` and `data.quoteAssetId` are both match your order;
 

@@ -10,7 +10,7 @@ Before you get started, all you need to know is that it takes only three steps t
 2.  Place the payment link on a button.
 3.  Users scan the QR code to pay, and the Online Payment look queries the payment results.
 
-More about MixPay, you can check [this](/developers/guides/introduction) for reference.
+More about MixPay, you can check [this](/guides/introduction) for reference.
 
 ## Demo
 
@@ -28,12 +28,12 @@ Next, we start with a detailed guide.
 
 ### Step 1 - Create the payment link
 
-1.  There is no need to register MixPay to use MixPay API. You can just use MixPay API with your preferred languages. MixPay API click [here](/developers/api/overview).
+1.  There is no need to register MixPay to use MixPay API. You can just use MixPay API with your preferred languages. MixPay API click [here](/api/overview).
 2.  Also, you can use this bot(7000101422) to get the Mixin UUID; just send the Mixin ID in the chat window to the bot. It's simple, and no programming is required. Also, you can get this UUID via this [API](https://developers.mixin.one/docs/api/users/search), and you can click [here](https://developers.mixin.one/docs/dapp/getting-started/create-dapp) for the tutorial.
-3.  The ID of cryptocurrency you need to acquire. The type of assets is used for settlement and quote. Also, you can click [here](/developers/guides/assets) for detail about supported assets.
+3.  The ID of cryptocurrency you need to acquire. The type of assets is used for settlement and quote. Also, you can click [here](/guides/assets) for detail about supported assets.
 
 
-1.  You can use this [API](/developers/api/payments/pay) to integrate with MixPay. The specific parameters are as below. And you can place the payment link on a button, and the customers scan the QR code to pay.
+1.  You can use this [API](/api/payments/pay) to integrate with MixPay. The specific parameters are as below. And you can place the payment link on a button, and the customers scan the QR code to pay.
 
 And the `traceId` you can generate randomly. If you use Golang, the sample code is like below.
 
@@ -79,7 +79,7 @@ When you've generated the payment link, you can place the payment link on a butt
 
 ### Step 3 - Look query the payment results
 
-Then you can use this [API](/developers/api/payments/payments-results) to loop query payment results. The parameter is the `traceId` you generated. And the response is the `status` of payment. The `status` has three parameters, unpaid, failed and success.
+Then you can use this [API](/api/payments/payments-results) to loop query payment results. The parameter is the `traceId` you generated. And the response is the `status` of payment. The `status` has three parameters, unpaid, failed and success.
 
 ## JS Plugin
 

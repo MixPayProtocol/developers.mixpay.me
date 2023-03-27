@@ -16,11 +16,11 @@ https://api.mixpay.me/v1/payments
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving money, pls see [Three types of account](/developers/guides/integration-verview#three-types-of-account) and [How to get payeeId](/developers/guides/integration-verview#payee-id). |
+| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving money, pls see [Three types of account](/guides/integration-verview#three-types-of-account) and [How to get payeeId](/guides/integration-verview#payee-id). |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. `orderId` and `payeeId` make a payment unique. |
 | `paymentAssetId` | <span class="required">*required</span> | String | `assetId` of payment cryptocurrency. |
 | `settlementAssetId` | <span class="required">*required</span> | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. But you need to pay attention to the `strictMode` field.|
-| `strictMode` | optional | Boolean | Default `false`. `true` means that the payment must be settled strictly according to the currency set by settlementAssetId. See [here](/developers/api/strict-mode) for more details.|
+| `strictMode` | optional | Boolean | Default `false`. `true` means that the payment must be settled strictly according to the currency set by settlementAssetId. See [here](/api/strict-mode) for more details.|
 | `quoteAmount` | <span class="required">*required</span> | Numeric | Corresponding to the amount of quoteAssetId. For example, the current commodity value is 10 USDT |
 | `quoteAssetId` | <span class="required">*required</span> | String | `assetId` of quote cryptocurrency.|
 | `isChain` | <span class="required">*required</span> | Boolean | Whether is an on-chain payment or not. `true` is using on-chain payment, `false` means pay using Mixin App. |
@@ -32,12 +32,12 @@ https://api.mixpay.me/v1/payments
 | `settlementMemo` | optional | String | maximum 200. A memo is similar to Mixin Snapshots, this parameter you can customize. |
 | `returnTo` | optional | String | After successful payment, the URL page will want to redirect to. Useful when you are in a browser JavaScript environment. |
 | `failedReturnTo` | optional | String | After payment failure, the URL page will want to redirect to. Useful when you are in a browser JavaScript environment. |
-| `callbackUrl` | optional | String | After payment successfully, MixPay will issue a POST request to this URL on our server-side. For security reasons, URLs only support HTTPS and has to be [URL encoded](https://www.w3schools.com/tags/ref_urlencode.ASP). Please refer to [Payment Callback](/developers/api/payments/payment-callback). |
+| `callbackUrl` | optional | String | After payment successfully, MixPay will issue a POST request to this URL on our server-side. For security reasons, URLs only support HTTPS and has to be [URL encoded](https://www.w3schools.com/tags/ref_urlencode.ASP). Please refer to [Payment Callback](/api/payments/payment-callback). |
 | `expiredTimestamp` | optional | int | Set a expired [timestamp](https://en.wikipedia.org/wiki/Unix_time). This value must be greater than 10s and less than 240min. After this period, the payment result status field will be marked as `failed`, and the `failureReason` will be `Payment overtime`. If you are not setting this value, the payer can have unlimited time to complete this payment. |
 
 ##### INFO
 
-`settlementMemo` parameter explanations: If you use Mixin API like [GET /snapshots](https://developers.mixin.one/docs/api/transfer/snapshots), you can find the `memo` in this response. This memo is the settlementMemo set by you. If you don't use this parameter, the specification of the memo can be found [here](/developers/api/memo).
+`settlementMemo` parameter explanations: If you use Mixin API like [GET /snapshots](https://developers.mixin.one/docs/api/transfer/snapshots), you can find the `memo` in this response. This memo is the settlementMemo set by you. If you don't use this parameter, the specification of the memo can be found [here](/api/memo).
 
 ### Example request - Create On-chain Payment
 
@@ -92,7 +92,7 @@ curl -i -X POST https://api.mixpay.me/v1/payments \
 ## Collect the money
 
 
-Please refer to [Pay using an on-chain Wallet](/developers/guides/using-raw-api#pay-using-an-on-chain-wallet).
+Please refer to [Pay using an on-chain Wallet](/guides/using-raw-api#pay-using-an-on-chain-wallet).
 
 
 
@@ -100,5 +100,5 @@ Please refer to [Pay using an on-chain Wallet](/developers/guides/using-raw-api#
 
 
 
-When is a MixPay payment expired? Please refer to [Expiration](/developers/guides/using-raw-api#expiration).
+When is a MixPay payment expired? Please refer to [Expiration](/guides/using-raw-api#expiration).
 

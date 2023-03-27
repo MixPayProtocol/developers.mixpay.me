@@ -7,7 +7,7 @@ MixPay API for translating a Mixin ID into UUID for format.
 Providing a Mixin ID, like `40053095`, will get back to your `a0d7791408776b47eb1dd3f94ed15d6a`.
 
 :::info
-This API only searches the MixPay users, and will not search Mixin Network. That means you have to use our MixPay App first. How to use MixPay? Please reference [Getting Started](/developers/guides/getting-started). You can use this API to get `payeeID`.
+This API only searches the MixPay users, and will not search Mixin Network. That means you have to use our MixPay App first. How to use MixPay? Please reference [Getting Started](/guides/getting-started). You can use this API to get `payeeID`.
 :::
 
 ## How to get Mixin ID?

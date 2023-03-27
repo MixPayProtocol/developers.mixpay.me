@@ -11,6 +11,6 @@ MixPay is very flexible because of its underlying ability to separate the three 
 
 The supported assets can be found in the following links.
 
--   [Payment Assets](/developers/guides/payment-assets)
--   [Quote Assets](/developers/guides/quote-assets)
--   [Settlement Assets](/developers/guides/settlement-assets)
+-   [Payment Assets](/guides/payment-assets)
+-   [Quote Assets](/guides/quote-assets)
+-   [Settlement Assets](/guides/settlement-assets)

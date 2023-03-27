@@ -10,14 +10,14 @@ MixPay is decentralised and supports Mixin Messenger and any on-chain wallet for
 
 ## Settlement Assets List
 
-Detailed information about payment assets [API](/developers/api/assets/settlement-assets).
+Detailed information about payment assets [API](/api/assets/settlement-assets).
 
 ### **Cryptocurrencies**
 
 :::warning
 The following is just an example list, the assets support list changes over time, and most of the time, it will be outdated. 
 
-Please always use the [settlement-assets API](/developers/api/assets/settlement-assets) to get assets' UUID and check for all supported assets.
+Please always use the [settlement-assets API](/api/assets/settlement-assets) to get assets' UUID and check for all supported assets.
 :::
 
 

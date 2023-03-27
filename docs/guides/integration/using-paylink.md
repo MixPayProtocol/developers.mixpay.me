@@ -7,11 +7,11 @@ slug: /guides/using-paylink
 You can use our MixPay payment page to create a MixPay payment. Paylink is the most convenient way of integrating MixPay.
 
 :::warning
-IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [short link](/developers/api/payments/one-time-payment) in the production.
+IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [short link](/api/payments/one-time-payment) in the production.
 
 Although this method is more convenient, and you may be more inclined to use this method of splicing parameters, you need to pay attention that when using this method, people can easily in the browser change the parameters you set.
 
-Please checkout the [Security Guidelines](/developers/guides/security-guidelines).
+Please checkout the [Security Guidelines](/guides/security-guidelines).
 :::
 
 ## Start with an example.
@@ -57,9 +57,9 @@ returnTo=https%3A%2F%2Fgoogle.com
 ```
 
 
-1. `payeeId` is the receiver ID in UUID format. Here is how you can see the UUID  [get-mixin-uuid API](/developers/api/users/get-mixin-uuid);
-2. `settlementAssetId` is the specific coin will the payee wan to accept. You can see the supported asset id in [Settlement Assets](/developers/api/assets/settlement-assets) in UUID format.
-3. `quoteAssetId` is the cryptocurrency in UUID format, and you can see the supported asset id in [Quote Assets](/developers/api/assets/quote-assets).
+1. `payeeId` is the receiver ID in UUID format. Here is how you can see the UUID  [get-mixin-uuid API](/api/users/get-mixin-uuid);
+2. `settlementAssetId` is the specific coin will the payee wan to accept. You can see the supported asset id in [Settlement Assets](/api/assets/settlement-assets) in UUID format.
+3. `quoteAssetId` is the cryptocurrency in UUID format, and you can see the supported asset id in [Quote Assets](/api/assets/quote-assets).
 4. `quoteAmount` is the total payment amount according to the `quoteAssetId`.
 5. `orderId`   -   Unique in your system. String lengths **between 6 and 36 must be letters, numbers, dashes, underscores, and NO space. `orderId` and `payeeId` make a payment unique. 
 6. `returnTo` when the payment is finished, the customer will be redirected to this URL. Generally will be the order detail page.
@@ -68,7 +68,7 @@ returnTo=https%3A%2F%2Fgoogle.com
 
 There are several parameters here, used to specify the default behavior of the Checkout Page.
 
-7. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/developers/api/assets/payment-assets) in UUID format.
+7. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
 8. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
 9. `style` The page is divided into PC template, Mobile universal template, and Mobile wallet template. Setting `style=mobile` can force the mobile side to use the universal template.
 
@@ -101,4 +101,4 @@ There are several parameters here, used to specify the default behavior of the C
 
 At this point, customers are paying crypto using our Paylink; how can you get the paying results?
 
-You can use the [Payment Callback](/developers/api/payments/payment-callback) to get the feedback.
+You can use the [Payment Callback](/api/payments/payment-callback) to get the feedback.

@@ -44,4 +44,4 @@ cient
 
 ## Resources
 
-* [Documentation API](/developers/api/overview)
+* [Documentation API](/api/overview)

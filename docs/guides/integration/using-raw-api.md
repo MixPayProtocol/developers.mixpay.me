@@ -17,27 +17,27 @@ When a customer makes a purchase, on your App check-out page, show a "Pay with C
 ![Request for payment view](./pay-with-mixpay-iphone.png)
 
 1. In this view:
-    1. Using [Quote Assets ](/developers/api/assets/quote-assets)API to fetch the price in any supported cryptocurrency;
-    2. Using [Payment Assets ](/developers/api/assets/payment-assets)API to let customers select which cryptocurrency they want to pay;
+    1. Using [Quote Assets ](/api/assets/quote-assets)API to fetch the price in any supported cryptocurrency;
+    2. Using [Payment Assets ](/api/assets/payment-assets)API to let customers select which cryptocurrency they want to pay;
     3. Tip: Above API calls can all happen on your App Side.
 
 2. When the customer **clicks to confirm**, based on which wallet has been chosen: 
-    1. If the customer chooses "Mixin Wallet", you can call our [accepting-payments API](/developers/api/payments/accepting-payments) to create a payment;
+    1. If the customer chooses "Mixin Wallet", you can call our [accepting-payments API](/api/payments/accepting-payments) to create a payment;
     
-    2. If It's an "On-chain Wallet", should call our [on-chain-payments API](/developers/api/payments/onchain-payments) to create a payment;
+    2. If It's an "On-chain Wallet", should call our [on-chain-payments API](/api/payments/onchain-payments) to create a payment;
     
 3. When payment is created successfully, your App base the response and performs corresponding actions to collect user payments (This step will explain later).
 
 4. When the customer finishes paying crypto ( depending on what cryptocurrency the customer chooses to pay, the delay varies from 5 seconds to 30mins or more), showing a "Waiting Payment Processing" hint to the customer;
 
-5. In the meantime, the App client uses the `orderId` to call [payments-results API](/developers/api/payments/payments-results) for checking payment results. Or using the [Payment Callback](/developers/api/payments/payment-callback) on your server side.
+5. In the meantime, the App client uses the `orderId` to call [payments-results API](/api/payments/payments-results) for checking payment results. Or using the [Payment Callback](/api/payments/payment-callback) on your server side.
 
 6. It's recommended to make the Payments Results API call every two seconds.
 
 
 ### Pay with Mixin wallet 
 
-In step 3, if the customer is selecting Pay using Mixin Wallet, your App should call [accepting-payments API](/developers/api/payments/accepting-payments).
+In step 3, if the customer is selecting Pay using Mixin Wallet, your App should call [accepting-payments API](/api/payments/accepting-payments).
 
 When getting the MixPay API result, your App client has to call Mixin App using URL Schema([What is URL Schema? ](https://helpcenter.trendmicro.com/en-us/article/tmka-18277)) to finish the payment:  
 
@@ -45,7 +45,7 @@ When getting the MixPay API result, your App client has to call Mixin App using 
 mixin://pay?recipient=&asset=&amount=&memo=&trace=
 ```
 
-As you can see, there are parameters in the Mixin URL Schema, those parameter value are matching  [Accepting Payments ](/developers/api/payments/accepting-payments)response as following: 
+As you can see, there are parameters in the Mixin URL Schema, those parameter value are matching  [Accepting Payments ](/api/payments/accepting-payments)response as following: 
 
 ```bash
 // Mixin Param = MixPay Accepting Payments API result
@@ -62,11 +62,11 @@ Just passing the key value correspondingly, and the URL Schema will do the rest.
 
 ### Pay using an on-chain Wallet
 
-In step 3, if the customer is selecting Pay using the on-chain Wallet, your App should call on-chain payment API](/developers/api/payments/onchain-payments).
+In step 3, if the customer is selecting Pay using the on-chain Wallet, your App should call on-chain payment API](/api/payments/onchain-payments).
 
-> Note: [on-chain-payments API](/developers/api/payments/onchain-payments) and [accepting-payments API](/developers/api/payments/accepting-payments) use the same endpoint; the only difference is the on-chain payment API payload with an `isChain` key set to `true`.
+> Note: [on-chain-payments API](/api/payments/onchain-payments) and [accepting-payments API](/api/payments/accepting-payments) use the same endpoint; the only difference is the on-chain payment API payload with an `isChain` key set to `true`.
 
-At the [onchain-payments API](/developers/api/payments/onchain-payments) JSON Response, there is a key call `destination`; this is the Address customer has to transfer the cryptocurrency.
+At the [onchain-payments API](/api/payments/onchain-payments) JSON Response, there is a key call `destination`; this is the Address customer has to transfer the cryptocurrency.
 
 You can reference the following UI to construct your App View:
 
@@ -150,7 +150,7 @@ If a customer pays with a "tolerate period" expired payment, if is "Pay with Mix
 
 At this point, customers are paying crypto using our Paylink; how can you get the paying results?
 
-On your server side, you can loop through the [payments-results API](/developers/api/payments/payments-results) using `orderId` + `payeeId`.
+On your server side, you can loop through the [payments-results API](/api/payments/payments-results) using `orderId` + `payeeId`.
 
-It's recommended to implement the [Payment Callback](/developers/api/payments/payment-callback) flow, for better performance.
+It's recommended to implement the [Payment Callback](/api/payments/payment-callback) flow, for better performance.
 

@@ -19,4 +19,4 @@ Please refer to this article - [MixPay Shopify Plugin Deployment Tutorial](https
 
 ## Seeking for help?
 
-If you encounter any problem, feel free to [contact our customer service](/developers/guides/contact-customer-service).
+If you encounter any problem, feel free to [contact our customer service](/guides/contact-customer-service).

@@ -351,7 +351,7 @@ In this regard, you need to [monitor the account transfer state of your Mixin ro
 
 ### 3. Refund logic
 
-MixPay attaches the refund order information to the returned `memo` - the `trace_id` used when transferring. You need to use `trace_id` to confirm which order is refunded. The specific format of Memo can be found [here](/developers/api/memo#memo-specification) . Of course, the reason for the refund is not necessarily timeout, there may be more, see [here](/developers/api/error-codes#reason-for-refund) .
+MixPay attaches the refund order information to the returned `memo` - the `trace_id` used when transferring. You need to use `trace_id` to confirm which order is refunded. The specific format of Memo can be found [here](/api/memo#memo-specification) . Of course, the reason for the refund is not necessarily timeout, there may be more, see [here](/api/error-codes#reason-for-refund) .
 
 You may receive a transfer from the MixPay bot and get the following `memo` :
 
@@ -371,7 +371,7 @@ Respectively correspond to:
 RF (Refund)|trace_id|error_code
 ```
 
-All possible `error_code` can be found in this link - [Error Codes](/developers/api/error-codes#reason-for-refund) .
+All possible `error_code` can be found in this link - [Error Codes](/api/error-codes#reason-for-refund) .
 
 ## Step 4: Turn on the necessary configuration
 
@@ -383,7 +383,7 @@ The last step only requires you to provide the following information to the MixP
 
 -   `Wallet` field is the value of your payment method, for example: `binance`.
 
-Generally, you can contact your account manager. If there is no account manager, please go to [Contact Customer Service - Help | MixPay Developer Documents](/developers/guides/contact-customer-service) , and someone in the group will assist you.
+Generally, you can contact your account manager. If there is no account manager, please go to [Contact Customer Service - Help | MixPay Developer Documents](/guides/contact-customer-service) , and someone in the group will assist you.
 
 ## Frequently Asked Questions
 
@@ -397,7 +397,7 @@ A: Yes. MixPay determines that the order is completed and depends on the transfe
 
 **Q: How to put funds into my Mixin robot?**
 
-A: You can use our [Paylink](/developers/api/payments/pay) .`payeeId` is **Step 1's** `client_id` when you create the bot, and `settlementAssetId`is the asset you support.
+A: You can use our [Paylink](/api/payments/pay) .`payeeId` is **Step 1's** `client_id` when you create the bot, and `settlementAssetId`is the asset you support.
 
 **Q: How to monitor the incoming transfer to my Mixin bot?**
 A: There are two ways. The first is to use [Mixin's Websocket](https://developers.mixin.one/zh-CN/docs/dapp/guide/message-loop) to listen for [Transfer type](https://developers.mixin.one/zh-CN/docs/api/messages/category#transfers) messages. The second is to poll the [Read Snapshot List](https://developers.mixin.one/docs/api/transfer/snapshots) API, which will only return your robot-related transfers. Checking the response `memo` filed, we already explained in the above "Refund logic" section.

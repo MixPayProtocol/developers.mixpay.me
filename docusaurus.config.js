@@ -6,7 +6,7 @@ module.exports = {
   title: 'MixPay Developers',
   tagline: 'MixPay Developers Documents',
   url: 'https://mixpay.me',
-  baseUrl: '/',
+  baseUrl: '/developers/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'images/favicon.ico',
@@ -35,8 +35,8 @@ module.exports = {
         src: 'images/logo.png',
       },
       items: [
-        {to: 'developers/guides/introduction', label: 'Docs', position: 'left'},
-        {to: '/developers/api/overview', label: 'API Reference', position: 'left'},
+        {to: '/guides/introduction', label: 'Docs', position: 'left'},
+        {to: '/api/overview', label: 'API Reference', position: 'left'},
         {
           href: 'https://mixpay.me/blog/',
           label: 'Blog',
@@ -101,7 +101,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebar.docs.js'),
           path: 'docs',
-          routeBasePath: '/developers',
+          routeBasePath: '/',
           // Please change this to your repo.
           editUrl: 'https://github.com/MixPayProtocol/developers.mixpay.me',
           editLocalizedFiles: true,
