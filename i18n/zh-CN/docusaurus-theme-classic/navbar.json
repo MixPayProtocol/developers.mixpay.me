@@ -1,0 +1,26 @@
+{
+  "title": {
+    "message": "Mixin 开发者文档",
+    "description": "The title in the navbar"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.API": {
+    "message": "API",
+    "description": "Navbar item with label API"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.Showcase": {
+    "message": "展示",
+    "description": "Navbar item with label Showcase"
+  },
+  "item.label.News": {
+    "message": "新闻",
+    "description": "Navbar item with label News"
+  }
+}

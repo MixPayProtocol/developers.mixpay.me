@@ -1,0 +1,15 @@
+node_modules/
+dist/
+api/_site
+.sass-cache
+.jekyll-cache
+.DS_Store
+test.sh
+*.xml
+*.iml
+.idea
+settings.json
+app.zone.yaml
+deploy.zone.sh
+build/
+.docusaurus/
