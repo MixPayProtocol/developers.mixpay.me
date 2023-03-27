@@ -103,7 +103,7 @@ module.exports = {
           path: 'docs',
           routeBasePath: '/',
           // Please change this to your repo.
-          editUrl: 'https://github.com/MixPayProtocol/developers.mixpay.me',
+          editUrl: 'https://github.com/MixPayProtocol/developers.mixpay.me/tree/master',
           editLocalizedFiles: true,
         },
         theme: {
