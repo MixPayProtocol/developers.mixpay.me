@@ -23,7 +23,7 @@ https://api.mixpay.me/v1/payments_result
 | --- | --- | --- | --- |
 | `traceId` | <span class="required">*required</span> if no `orderId` | String | Trace Id of payments. |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. |
-| `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving money, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id).  |
+| `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
 
 ## Example request - GET payment results.
 

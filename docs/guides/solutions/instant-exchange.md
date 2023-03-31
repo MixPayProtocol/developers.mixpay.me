@@ -98,9 +98,9 @@ curl -i -X POST https://api.mixpay.me/v1/payments \
 | --- | --- | --- | --- |
 | `payeeId` | <span class="required">*required</span> | String | three settlement modes are supported, normal user, robot, and multisig group, so it is usually the Mixin UUID of a normal user or robot. You can also specify the multisigId of a sub-account. |
 | `traceId` | <span class="required">*required</span> | String | UUID, used to prevent double payment. |
-| `paymentAssetId` | <span class="required">*required</span> | String | assetId of payment cryptocurrency. |
-| `settlementAssetId` | <span class="required">*required</span> | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. |
-| `quoteAssetId` | <span class="required">*required</span> | String | assetId of quote cryptocurrency.|
+| `paymentAssetId` | <span class="required">*required</span> | String | assetId of payment cryptocurrency. You can see the supported asset id in [Payment Assets](/api/assets/payment-assets). |
+| `settlementAssetId` | <span class="required">*required</span> | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. For more options, see [here](/api/assets/settlement-assets). |
+| `quoteAssetId` | <span class="required">*required</span> | String | assetId of quote cryptocurrency. For more options, see [here](/api/assets/quote-assets). |
 | `quoteAmount` | <span class="required">*required</span> | Numeric | Amount of cryptocurrency received; if left blank, the user can enter manually. |
 | `isChain` | optional |  Boolean | Whether is on-chain payment or not. `true` is using on-chain payment, `false` means pay using Mixin App. |
 | `remark` | optional |  String | Payment remark viewable by the payee. |

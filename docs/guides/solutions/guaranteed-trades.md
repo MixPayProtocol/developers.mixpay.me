@@ -13,12 +13,6 @@ Before you get started, all you need to know is that it takes only four steps to
 
 More about MixPay, you can check [this](/guides/introduction) for reference.
 
-## Demo
-
-This is the demo of MixPay.
-
-![](./pvfjlpq.gif)
-
 ## For developers
 
 There is no need to register MixPay to use MixPay API. You can use MixPay API with your preferred languages. MixPay API click [here](/api/overview).
@@ -47,7 +41,7 @@ The specific parameters are below, and the `payeeId` must be `multisigId` ge
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `payeeId` | <span class="required">*required</span> | String | three settlement modes are supported, normal user, robot, and multisig group, so it is usually the Mixin UUID of a normal user or robot. You can also specify the multisigId of a sub-account. |
+| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
 | `settlementAssetId` | optional | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. |
 | `quoteAssetId` | optional | String | assetId of quote cryptocurrency. For more options, see [here](/api/assets/quote-assets).|
 | `quoteAmount` | optional | Numeric | Amount of cryptocurrency received, if left blank, the user can enter manually. |

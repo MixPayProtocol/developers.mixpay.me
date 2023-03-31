@@ -12,12 +12,6 @@ Before you get started, all you need to know is that it takes only three steps t
 
 More about MixPay, you can check [this](/guides/introduction) for reference.
 
-## Demo
-
-This is the demo of MixPay.
-
-![](./pvfjlpq.gif)
-
 ## API Integration
 
 Before you start, you need to know that through the API of MixPay, the crypto paid by the user is settled directly to your Mixin bot, MixPay user or Mixin Wallet.
@@ -66,9 +60,9 @@ https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `payeeId` | <span class="required">*required</span> | String | Three settlement modes are supported, regular user, robot, and multisig group, so it is usually the Mixin UUID of a regular user or robot. You can also specify the multisigId of a sub-account. |
-| `settlementAssetId` | optional | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. |
-| `quoteAssetId` | optional | String | assetId of quote cryptocurrency.|
+| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
+| `settlementAssetId` | optional | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. For more options, see [here](/api/assets/settlement-assets). |
+| `quoteAssetId` | optional | String | assetId of quote cryptocurrency. For more options, see [here](/api/assets/quote-assets). |
 | `quoteAmount` | optional | Numeric | Amount of cryptocurrency received, if left blank, the user can enter manually. |
 | `remark` | optional | String | Payment remark viewable by the payee. |
 | `traceId` | optional | String | UUID, used to prevent double payment. |
