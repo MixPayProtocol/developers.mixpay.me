@@ -32,12 +32,12 @@ https://mixpay.me/pay
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `payeeId` | <span class="required">*required</span> | String |  Account ID for receiving money, pls see [Three types of account](/guides/integration-verview#three-types-of-account) and [How to get payeeId](/guides/integration-verview#payee-id). |
+| `payeeId` | <span class="required">*required</span> | String |  Account ID for receiving money, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. `orderId` and `payeeId` make a payment unique. |
 | `traceId` | optional | String |  UUID, used to prevent double payment and to check the payment result. You should use `orderId` instead.  |
-| `settlementAssetId` | optional | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. But you need to pay attention to the `strictMode` field. |
+| `settlementAssetId` | optional | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. But you need to pay attention to the `strictMode` field.For more options, see [here](/api/assets/settlement-assets). |
 | `strictMode` | optional | Integer | You can set `0` or `1`. Default `0`. `1` means that the payment must be settled strictly according to the currency set by settlementAssetId. See [here](/api/strict-mode) for more details.|
-| `quoteAssetId` | optional | String | `assetId` of quote cryptocurrency.|
+| `quoteAssetId` | optional | String | `assetId` of quote cryptocurrency. You can see the supported asset id in [Quote Assets](/api/assets/quote-assets).|
 | `quoteAmount` | optional | Numeric | Amount of cryptocurrency received, if left blank, the user can enter manually. |
 | `remark` | optional | String |  maximum 50. Payment remark viewable by the payer. |
 | `settlementMemo` | optional | String | maximum 200. A memo is similar to Mixin Snapshots, this parameter you can customise. |

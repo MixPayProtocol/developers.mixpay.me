@@ -49,7 +49,7 @@ The specific parameters are below, and the `payeeId` must be `multisigId` ge
 | --- | --- | --- | --- |
 | `payeeId` | <span class="required">*required</span> | String | three settlement modes are supported, normal user, robot, and multisig group, so it is usually the Mixin UUID of a normal user or robot. You can also specify the multisigId of a sub-account. |
 | `settlementAssetId` | optional | String | assetId of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. |
-| `quoteAssetId` | optional | String | assetId of quote cryptocurrency.|
+| `quoteAssetId` | optional | String | assetId of quote cryptocurrency. For more options, see [here](/api/assets/quote-assets).|
 | `quoteAmount` | optional | Numeric | Amount of cryptocurrency received, if left blank, the user can enter manually. |
 | `remark` | optional | String | Payment remark viewable by the payee. |
 | `traceId` | optional | String | UUID, used to prevent double payment. |
@@ -58,7 +58,6 @@ The following section will explain the meaning of the parameters of this API and
 
 The ID of cryptocurrency you need to acquire. The type of assets is used for settlement and quote. Also, you can click [here](/guides/assets) for the detail about supported assets.
 
-And the `traceId` you can generate randomly. If you use Golang, the sample code is like below.
 
 ```go
 package main

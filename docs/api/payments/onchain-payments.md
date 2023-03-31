@@ -16,13 +16,13 @@ https://api.mixpay.me/v1/payments
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving money, pls see [Three types of account](/guides/integration-verview#three-types-of-account) and [How to get payeeId](/guides/integration-verview#payee-id). |
+| `payeeId` | <span class="required">*required</span> | String | Account ID for receiving money, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. `orderId` and `payeeId` make a payment unique. |
-| `paymentAssetId` | <span class="required">*required</span> | String | `assetId` of payment cryptocurrency. |
-| `settlementAssetId` | <span class="required">*required</span> | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. But you need to pay attention to the `strictMode` field.|
+| `paymentAssetId` | <span class="required">*required</span> | String | `assetId` of payment cryptocurrency. You can see the supported asset id in [Payment Assets](/api/assets/payment-assets). |
+| `settlementAssetId` | <span class="required">*required</span> | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. But you need to pay attention to the `strictMode` field. For more options, see [here](/api/assets/settlement-assets). |
 | `strictMode` | optional | Boolean | Default `false`. `true` means that the payment must be settled strictly according to the currency set by settlementAssetId. See [here](/api/strict-mode) for more details.|
 | `quoteAmount` | <span class="required">*required</span> | Numeric | Corresponding to the amount of quoteAssetId. For example, the current commodity value is 10 USDT |
-| `quoteAssetId` | <span class="required">*required</span> | String | `assetId` of quote cryptocurrency.|
+| `quoteAssetId` | <span class="required">*required</span> | String | `assetId` of quote cryptocurrency. You can see the supported asset id in [Quote Assets](/api/assets/quote-assets).|
 | `isChain` | <span class="required">*required</span> | Boolean | Whether is an on-chain payment or not. `true` is using on-chain payment, `false` means pay using Mixin App. |
 | `traceId` | optional | String |  UUID, used to prevent double payment and checking the payment result. You should use `orderId` instead.  |
 | `clientId` | optional | String | UUID of client of the payment. |

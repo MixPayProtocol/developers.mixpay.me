@@ -8,7 +8,6 @@ module.exports = {
       label: 'Integration',
       collapsed: false,
       items: [
-        'guides/integration/integration-verview',
         'guides/integration/using-paylink',
         'guides/integration/using-js-sdk',
         'guides/integration/using-raw-api',
@@ -71,14 +70,6 @@ module.exports = {
         'api/connect/error-codes',
         'api/connect/memo',
         'api/connect/strict-mode',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Users',
-      collapsed: false,
-      items: [
-        'api/users/get-mixin-uuid',
       ],
     },
     {

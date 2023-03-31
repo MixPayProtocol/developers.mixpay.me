@@ -18,10 +18,10 @@ https://api.mixpay.me/v1/payments_estimated
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `paymentAssetId` | <span class="required">*required</span> | String | assetId of payment cryptocurrency. |
-| `settlementAssetId` | <span class="required">*required</span> | String | assetId of settlement cryptocurrency. Settlement assets you prefer. |
+| `paymentAssetId` | <span class="required">*required</span> | String | assetId of payment cryptocurrency. You can see the supported asset id in [Payment Assets](/api/assets/payment-assets). |
+| `settlementAssetId` | <span class="required">*required</span> | String | assetId of settlement cryptocurrency. Settlement assets you prefer. For more options, see [here](/api/assets/settlement-assets). |
 | `quoteAmount` | <span class="required">*required</span> | Numeric | Corresponding to the amount of quoteAssetId, for example, the current commodity value is 10 USDT |
-| `quoteAssetId` | <span class="required">*required</span> | String | assetId of quote cryptocurrency.|
+| `quoteAssetId` | <span class="required">*required</span> | String | assetId of quote cryptocurrency. You can see the supported asset id in [Quote Assets](/api/assets/quote-assets).|
 | `paymentAmount` | optional | Numeric | The quoteAmount parameter is invalid when paymentAmount is not null. |
 
 ### Example request - Payments Estimated.

@@ -1,33 +1,33 @@
 {
-  "features.secure": {
-    "message": "Secure"
+  "features.free": {
+    "message": "Zero fees"
   },
-  "features.secure.text": {
-    "message": " - All assets are stored in PoS-BFT-DAG distributed network"
+  "features.free.text": {
+    "message": " - MixPay is free for recipients, always. If the bill is 10 USDT, the recipient will receive the full 10 USDT."
   },
-  "features.fast": {
-    "message": "Fast"
+  "features.web3": {
+    "message": "Web3"
   },
-  "features.fast.text": {
-    "message": " - More than 1,000,000 TPS capacity with a final confirmation time of under 1 second."
+  "features.web3.text": {
+    "message": " - Experience MixPay with a Web3 way, no registration or KYC necessary."
+  },
+  "features.non-custodial": {
+    "message": "Non-custodial"
+  },
+  "features.non-custodial.text": {
+    "message": " - Enjoy instant settlement to a non-custodial wallet upon payment completion."
   },
   "features.powerful": {
     "message": "Powerful"
   },
   "features.powerful.text": {
-    "message": " - Supported 44 blockchains, such as BTC, ETH, XMR."
+    "message": " - MixPay utilizes a separate architecture for quote, payment, and settlement, allowing merchants to price and settle goods in any currency, while users can pay using any currency, including cryptocurrencies and fiat currencies."
   },
-  "features.free": {
-    "message": "Free"
+  "features.friendly": {
+    "message": "Developer-Friendly"
   },
-  "features.free.text": {
-    "message": " - No transaction fee."
-  },
-  "features.privacy": {
-    "message": "Privacy"
-  },
-  "features.privacy.text": {
-    "message": " - End to end encrypted messages."
+  "features.friendly.text": {
+    "message": " - Integrate a powerful web3 payment system in just three simple steps."
   },
   "buttons.get_started": {
     "message": "Get Started"

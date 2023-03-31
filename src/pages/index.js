@@ -14,42 +14,39 @@ function HomepageHeader() {
     <header className={clsx('hero', styles.heroBanner)}>
       <div className={clsx("container", styles.container)}>
         <div className={clsx("text-part", styles.left)}>
-          <h1 className={clsx("hero__title", styles.title)}> Build any decentralized applications on Mixin </h1>
+          <h1 className={clsx("hero__title", styles.title)}> Decentralized Web3 Cross-Chain Payment Protocol </h1>
+          <h2> Built as Web3, for Web3. </h2>
           <ul className={clsx("hero__subtitle", styles.subtitle)}>
             <li className={styles.subtitle_li}>
-              <span>🛡️ </span>
-              <strong>
-                <Translate>features.secure</Translate>
-              </strong>
-              <Translate>features.secure.text</Translate>
-            </li>
-            <li className={styles.subtitle_li}>
-              <span>⚡️ </span>
-              <strong>
-                <Translate>features.fast</Translate>
-              </strong>
-              <Translate>features.fast.text</Translate>
-            </li>
-            <li className={styles.subtitle_li}>
-              <span>🔋 </span>
-              <strong>
-                <Translate>features.powerful</Translate>
-              </strong>
-              <Translate>features.powerful.text</Translate>
-            </li>
-            <li className={styles.subtitle_li}>
-              <span>🆓 </span>
               <strong>
                 <Translate>features.free</Translate>
               </strong>
               <Translate>features.free.text</Translate>
             </li>
             <li className={styles.subtitle_li}>
-              <span>🔐 </span>
               <strong>
-                <Translate>features.privacy</Translate>
+                <Translate>features.web3</Translate>
               </strong>
-              <Translate>features.privacy.text</Translate>
+              <Translate>features.web3.text</Translate>
+            </li>
+            <li className={styles.subtitle_li}>
+              <strong>
+                <Translate>features.non-custodial</Translate>
+              </strong>
+              <Translate>features.non-custodial.text</Translate>
+            </li>
+            <li className={styles.subtitle_li}>
+              <strong>
+                <Translate>features.powerful</Translate>
+              </strong>
+              <Translate>features.powerful.text</Translate>
+            </li>
+
+            <li className={styles.subtitle_li}>
+              <strong>
+                <Translate>features.friendly</Translate>
+              </strong>
+              <Translate>features.friendly.text</Translate>
             </li>
           </ul>
           <div className={styles.buttons}>
@@ -62,7 +59,7 @@ function HomepageHeader() {
           </div>
         </div>
         <div className={clsx("image-part", styles.right)}>
-          <img src={useBaseUrl('images/home_head.svg')} class="main-bg" />
+          <img src={useBaseUrl('images/home_head.png')} class="main-bg" />
         </div>
       </div>
     </header>
