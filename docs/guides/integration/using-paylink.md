@@ -4,19 +4,25 @@ slug: /guides/using-paylink
 
 # Using Paylink
 
-You can use our MixPay payment page to create a MixPay payment. Paylink is the most convenient way of integrating MixPay.
+You can use our MixPay payment page to create a MixPay payment. Payment link is the most convenient way of integrating MixPay.
+
+We provide 3 types of payment links:
+1. **Permanent Payment Link**: This type of link can be customized and can be used for multiple payments. If you need to implement a long-term payment function, such as a donation, this type of link is a good choice. You can create a permanent payment link quickly in [Dashboard Payment Link](https://dashboard.mixpay.me/payment-link).
+2. **One-time Payment Link**: This type of link can only be used for a single payment. If you need to implement a one-time payment function, such as a bill, this type of link is a good choice.You can create a permanent payment link quickly in [Dashboard Billing](https://dashboard.mixpay.me/billing).
+3. **Universal Payment Link**: This type of link can achieve the functions of both permanent payment link and One-time payment link by customizing parameters, but the link cannot be personalized. If you need to implement a simple payment function, this type of link is a good choice.
+
+
+## Start with an example.
+
+Here is an example of universal payment link, click the following button and check it out yourself:
 
 :::warning
-IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [short link](/api/payments/one-time-payment) in the production.
+IMPORTANT: The example is for new users to understand how the MixPay payment flow. We recommend using [One-time Payment Link](/api/payments/one-time-payment) in the production.
 
 Although this method is more convenient, and you may be more inclined to use this method of splicing parameters, you need to pay attention that when using this method, people can easily in the browser change the parameters you set.
 
 Please checkout the [Security Guidelines](/guides/security-guidelines).
 :::
-
-## Start with an example.
-
-Here is an example, click the following button and check it out yourself:
 
 
 <a href="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=&returnTo=https%3A%2F%2Fgoogle.com" class="width-300"> 
@@ -65,36 +71,65 @@ returnTo=https%3A%2F%2Fgoogle.com
 6. `returnTo` when the payment is finished, the customer will be redirected to this URL. Generally will be the order detail page.
 
 
+## Special Parameters For Payment Link
+There are several parameters here, used to specify the default behavior of the Checkout Page(both of permanent payment link, One-time payment link, and universal payment link).
 
-There are several parameters here, used to specify the default behavior of the Checkout Page.
+1. `amount` is the total payment amount according to the `quoteAssetId`, and takes priority over `quoteAmount`.
+2. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
+3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
+4. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
 
-7. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
-8. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
-9. `style` The page is divided into PC template, Mobile universal template, and Mobile wallet template. Setting `style=mobile` can force the mobile side to use the universal template.
+<table style="width:100%;">
+  <tbody>
+    <tr>
+      <td>Desktop Template</td>
+      <td>
+        <img class="image-shadow" width="300" src="./pc-template.png" />
+      </td>
+    </tr>
+    <tr>
+      <td>Mobile Universal Template</td>
+      <td>
+        <img class="image-shadow" width="300" src="./mobile-universal-template.png" />
+      </td>
+    </tr>
+    <tr>
+      <td>Mobile Wallet Template</td>
+      <td>
+        <img class="image-shadow" width="300" src="./mobile-wallet-template.png" />
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-- PC template
+## Special Events For Payment Link
 
-<div class="image-shadow">
+1. if you want to embed the checkout page into your website by using an iframe. there is an example for you.
 
-![PC template](./pc-template.png#pic-center)
+```html
+<iframe src="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a
+&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
+&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
+&quoteAmount=10
+&orderId=your_order_id" style="width:100%;height:100%;border:none"></iframe>
+<script>
+  window.addEventListener('message', function(event) {
+    if(event.data.type === 'MIXPAY_PAYMENT') {
+      if (event.data.data.status === 'pending') {
+        // To do something when the payment is confirmed.
+      }
 
-</div>
+      if (event.data.data.status === 'success') {
+        // To do something when the payment is success.
+      }
 
-- Mobile universal template
-
-<div class="text-center width-300 image-shadow">
-
-![Mobile universal template](./mobile-universal-template.png)
-
-</div>
-
-- Mobile wallet Template
-
-<div class="text-center width-300 image-shadow">
-
-![Mobile wallet template](./mobile-wallet-template.png#pic-center)
-
-</div>
+      if (event.data.data.status === 'failed') {
+        // To do something when the payment is failed.
+      }
+    }
+  });
+</script>
+```
 
 
 ## Getting the result
