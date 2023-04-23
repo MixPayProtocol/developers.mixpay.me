@@ -79,7 +79,7 @@ There are several parameters here, used to specify the default behavior of the C
 3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
 4. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
 
-<table style="width:100%;">
+<table>
   <tbody>
     <tr>
       <td>Desktop Template</td>
