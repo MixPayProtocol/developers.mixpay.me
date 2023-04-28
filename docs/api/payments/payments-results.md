@@ -46,15 +46,20 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
         // If is USDT, then should be:
         // "quoteAssetId": "a1283b13-d483-4262-90dd-3b1b324a81fb",
         "quoteAssetId": "usd",
+        "quoteAssetVersion": "",
+
         "paymentAmount": "0.010013",
         "paymentSymbol": "USDT",
         "paymentAssetId": "4d8c508b-91c5-375b-92b0-ee702ed2dac5",
+        "paymentAssetVersion": "ERC20",
+
         "payee": "payee_username",
         "payeeId": "xxxxx-xxx-xxx-xxx-xxxxxxx",
         "payeeMixinNumber": "38xxxxx08",
         "payeeAvatarUrl": "https://mixin-images.zeromesh.net/X_GkLgUq-z7ktU_u5maX99sJKWxxxxxx170k1XcSryAsinVwtPgCRwKRu3nkjHWSEOaKco1G4yDX2E=s256",
         // On-chain transaction ID, only when on-chain payment
         "txid": "",
+        "blockExplorerUrl": "",
         "date": 1656513302,
         // when the payer pays more than he/her should 
         // pay, here is the surplus amount
@@ -70,20 +75,33 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
         "confirmations": -1,
         // amount should pay
         "payableAmount": "0.010013",
+        "payableSymbol": "USDT",
+        "payableAssetId": "4d8c508b-91c5-375b-92b0-ee702ed2dac5",
+        "payableAssetVersion": "ERC20",
         // see the "Checking for failure" section
         "failureCode": "0",
         "failureReason": "",
         // If status is `success`, will return `returnTo` when 
         // you create a payment, failed will return `failedReturnTo`'s value.
         "returnTo": "https://www.exmaple.com/show_payment_success?order_id=xxxxx",
-        "traceId": "a0d7791408776b47eb1dd3f94ed15d6a"
+        "traceId": "a0d7791408776b47eb1dd3f94ed15d6a",
+
+        // settle status
+        // pending - to be settled
+        // success - settlement completed
+        "settleStatus": "success",
+        // when settleStatus is pending, the following fields are empty characters.
+        "settleAmount": "0.00003",
+        "settleSymbol": "BTC",
+        "settleAsset": "c6d0c728-2624-429b-8e0d-d9d19b6592fa",
+        "settleAssetVersion": ""
     },
     "timestampMs": 1656561881048
 }
 ```
 
 :::info
-This response status returns `unpaid`, `pending`(processing), `failed` and `success`. You can loop query with the `traceId`.
+This response status returns `unpaid`, `pending`(processing), `failed` and `success`.
 :::
 
 ## Checking for success payment
@@ -145,9 +163,9 @@ You can use the `failureCode` and `failureReason` to check the result, their pos
 
 ```json
 '40000' => 'Payment overtime',
-'40001' => 'Receipt address is invalid. Maybe repeat transfer or timeout.',
 '40020' => 'Wrong asset paid',
 '40021' => 'Double payment',
-'40022' => 'TraceID does not exist',
 '40024' => 'Wrong Amount paid',
+'40025' => 'Too much market volatility.',
+...
 ```

@@ -98,3 +98,4 @@ Global error response, example:
 | 40023 | Payee does not exist in Memo. |
 | 40024 | Wrong Amount paid. |
 | 40025 | Too much market volatility.|
+| 40027 | Your payment fails due to transaction restrictions on settlement assets. |
