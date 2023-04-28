@@ -3,10 +3,10 @@
 This guide will show you the security must do and best practice when using MixPay.
 
 
-## 1. MUST: Always verify the quote amount and the payeeId
+## 1. MUST: Always verify the quote amount and the payeeId and the quoteAssetId
 
 
-**Never rely on the [payments-results API](/api/payments/payments-results)'s return `data.status` = `success` to mark an order is successfully paid.**
+**Never just rely on the [payments-results API](/api/payments/payments-results)'s return `data.status` = `success` to mark an order is successfully paid.**
 
 Because when you construct the following link:
 
