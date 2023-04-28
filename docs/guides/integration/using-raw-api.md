@@ -14,17 +14,17 @@ It's suitable for scenarios that can not use a browser, such as the Mobile Nativ
 
 When a customer makes a purchase, on your App check-out page, show a "Pay with Crypto" button. When the customer clicks the button, you should construct an App view like our [MixPay payment page.](https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=product1000432&returnTo=https%3A%2F%2Fgoogle.com)
 
-![Request for payment view](./pay-with-mixpay-iphone.png)
+![Request for payment view](./pay-with-mixpay-iphone.jpeg)
 
 1. In this view:
     1. Using [Quote Assets ](/api/assets/quote-assets)API to fetch the price in any supported cryptocurrency;
     2. Using [Payment Assets ](/api/assets/payment-assets)API to let customers select which cryptocurrency they want to pay;
     3. Tip: Above API calls can all happen on your App Side.
 
-2. When the customer **clicks to confirm**, based on which wallet has been chosen: 
+2. When the customer **clicks to choose a payment method**, based on which wallet has been chosen: 
     1. If the customer chooses "Mixin Wallet", you can call our [accepting-payments API](/api/payments/accepting-payments) to create a payment;
     
-    2. If It's an "On-chain Wallet", should call our [on-chain-payments API](/api/payments/onchain-payments) to create a payment;
+    2. If the customer chooses other payment methods, you should call our [on-chain-payments API](/api/payments/onchain-payments) to create a payment;
     
 3. When payment is created successfully, your App base the response and performs corresponding actions to collect user payments (This step will explain later).
 
@@ -60,17 +60,17 @@ Just passing the key value correspondingly, and the URL Schema will do the rest.
 
 > For more info for Mixin URL Schema, please read [this article](https://developers.mixin.one/docs/schema).
 
-### Pay using an on-chain Wallet
+### Pay with other payment methods
 
-In step 3, if the customer is selecting Pay using the on-chain Wallet, your App should call on-chain payment API](/api/payments/onchain-payments).
+In step 3, if the customer chooses other payment methods, your App should call [on-chain payment API](/api/payments/onchain-payments).
 
 > Note: [on-chain-payments API](/api/payments/onchain-payments) and [accepting-payments API](/api/payments/accepting-payments) use the same endpoint; the only difference is the on-chain payment API payload with an `isChain` key set to `true`.
 
-At the [onchain-payments API](/api/payments/onchain-payments) JSON Response, there is a key call `destination`; this is the Address customer has to transfer the cryptocurrency.
+At the [on-chain-payments API](/api/payments/onchain-payments) JSON Response, there is a key call `destination`; this is the Address customer has to transfer the cryptocurrency.
 
 You can reference the following UI to construct your App View:
 
-![Show wallet address QRcode View](./show-wallet-address-qrcode-iphone.png)
+![Show wallet address QRcode View](./show-wallet-address-qrcode-iphone.jpeg)
 
 > **Note: If the payment assets are EOS, you can use the** **`tag`** **and** **`destination`** **from the API result.**
 

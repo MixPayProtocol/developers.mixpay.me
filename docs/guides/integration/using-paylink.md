@@ -2,7 +2,7 @@
 slug: /guides/using-paylink
 ---
 
-# Using Paylink
+# Using Payment Link
 
 You can use our MixPay payment page to create a MixPay payment. Payment link is the most convenient way of integrating MixPay.
 
@@ -25,7 +25,7 @@ Please checkout the [Security Guidelines](/guides/security-guidelines).
 :::
 
 
-<a href="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=&returnTo=https%3A%2F%2Fgoogle.com" class="width-300"> 
+<a href="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=&returnTo=https%3A%2F%2Fgoogle.com" className="width-300"> 
 
 ![](./pay-with-crypto-btn.png)
 
@@ -79,28 +79,11 @@ There are several parameters here, used to specify the default behavior of the C
 3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
 4. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
 
-<table>
-  <tbody>
-    <tr>
-      <td>Desktop Template</td>
-      <td>
-        <img class="image-shadow" width="300" src="./pc-template.png" />
-      </td>
-    </tr>
-    <tr>
-      <td>Mobile Universal Template</td>
-      <td>
-        <img class="image-shadow" width="300" src="./mobile-universal-template.png" />
-      </td>
-    </tr>
-    <tr>
-      <td>Mobile Wallet Template</td>
-      <td>
-        <img class="image-shadow" width="300" src="./mobile-wallet-template.png" />
-      </td>
-    </tr>
-  </tbody>
-</table>
+| template name | example |
+|----|----|
+| Desktop Template | ![Desktop Template](./pc-template.png) |
+| Mobile Universal Template | ![Mobile Universal Template](./mobile-universal-template.png) |
+| Mobile Wallet Template | ![Mobile Wallet Template](./mobile-wallet-template.png) |
 
 ## Special Events For Payment Link
 

@@ -6,13 +6,13 @@ Integrate into MixPay Checkout page with your wallet payment method.
 
 This article will guide you how to use MixPay Protocol to integrate your payment method into the MixPay Checkout page.
 
-The following screenshot is the Checkout Page of MixPay. After integration, your crypto wallet will appear in the On-chain Pay and Binance Pay list:
+<!-- The following screenshot is the Checkout Page of MixPay. After integration, your crypto wallet will appear in the On-chain Pay and Binance Pay list: -->
 
-<div class="text-center width-400 ">
+<!-- <div class="text-center width-400 ">
 
 ![](./checkout-page_v3.png)
 
-</div>
+</div> -->
 
 ## Terminology explain
 

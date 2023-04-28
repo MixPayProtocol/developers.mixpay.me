@@ -4,7 +4,6 @@ slug: /guides/using-js-sdk
 
 # Using JS SDK
 
-MixPay API for creating a one-time payment.
 ---
 
 The Javascript version of the MixPay API sdk
@@ -12,18 +11,19 @@ The Javascript version of the MixPay API sdk
 ## Install
 
 ```shell
-npm install mixpayjs
+npm install mixpayjs@latest
 ```
 
 If you use `yarn`
 
 ```shell
-yarn add mixpayjs
+yarn add mixpayjs@latest
 ```
 
 ## Usage
 
 ```javascript
+// Create a one-time payment link
 const client = require('mixpayjs')();
 cient
   .createOneTimePaymentLink({
