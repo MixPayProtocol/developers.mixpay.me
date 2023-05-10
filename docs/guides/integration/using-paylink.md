@@ -77,7 +77,8 @@ There are several parameters here, used to specify the default behavior of the C
 1. `amount` is the total payment amount according to the `quoteAssetId`, and takes priority over `quoteAmount`.
 2. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
 3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
-4. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
+4. `payerEmail` is used to specify the email address of the payer to receive the payment results. `payerEmail` must be valid, or you can not create a payment. 
+5. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
 
 | template name | example |
 |----|----|
