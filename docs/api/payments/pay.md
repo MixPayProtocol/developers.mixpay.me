@@ -45,7 +45,6 @@ https://mixpay.me/pay
 | `failedReturnTo` | optional | String | After payment failure, the page will jump to `failedReturnTo` URL. |
 | `callbackUrl` | optional | String | After payment successfully, MixPay will issue a POST request to this URL on our server-side. For security reasons, URLs only support HTTPS and has to be [URL encoded](https://www.w3schools.com/tags/ref_urlencode.ASP). Please refer to [Payment Callback](/api/payments/payment-callback). |
 | `expiredTimestamp` | optional | int | Set a expired [timestamp](https://en.wikipedia.org/wiki/Unix_time). This value must be greater than 10s and less than 240min. After this period, the payment result status field will be marked as `failed`, and the `failureReason` will be `Payment overtime`. If you are not setting this value, the payer can have unlimited time to complete this payment. |
-| `style` | optional | String | This field is generally used in the scenario of using DApp, passing in `mobile` will display all available payment methods. |
 
 
 ### Example request - Get Payment Link

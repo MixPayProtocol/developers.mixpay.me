@@ -118,6 +118,6 @@ There are several parameters here, used to specify the default behavior of the C
 
 ## Getting the result
 
-At this point, customers are paying crypto using our Paylink; how can you get the paying results?
+At this point, customers are paying crypto using our Payment Link; how can you get the paying results?
 
 You can use the [Payment Callback](/api/payments/payment-callback) to get the feedback.
