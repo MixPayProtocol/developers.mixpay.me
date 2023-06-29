@@ -24,6 +24,14 @@ https://api.mixpay.me/v1/payments_result
 | `traceId` | <span class="required">*required</span> if no `orderId` | String | Trace Id of payments. |
 | `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. |
 | `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
+| `with=payment` | optional | String | Return with the relative payment object. |
+| `with=transactions` | optional | String | Return with the relative transaction objects.  |
+
+:::info
+If you just want to check if the payment is paid or not, Normally, you don't need the `with` parameter, checking the `data.status` is `success` is enough. The `with` parameter only if you need extra info about the payment. 
+
+If you want `transactions` and `payment`, you can pass it like `with=payment,transactions` in the URI.
+:::
 
 ## Example request - GET payment results.
 
@@ -94,7 +102,43 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
         "settleAmount": "0.00003",
         "settleSymbol": "BTC",
         "settleAsset": "c6d0c728-2624-429b-8e0d-d9d19b6592fa",
-        "settleAssetVersion": ""
+        "settleAssetVersion": "",
+
+        // if `with=transactions` presented
+        "transactions":[
+         {
+            "paymentAmount":"0.2",
+            "paymentAssetId":"25dabac5-056a-48ff-b9f9-f67395dc407c",
+            "paymentAssetSymbol":"TRX",
+            "paymentAssetVersion":"",
+            "requiredConfirms":1,
+            "confirmations":10,
+            "txid":"7add03d5c2eb1da4b6487d4e80c5968f18c908830d90269f3b35eef72f5ade17",
+            "blockExplorerUrl":"https://tronscan.org/#/transaction/7add03d5c2eb1da4b6487d4e80c5968f18c908830d90269f3b35eef72f5ade17",
+            "broadcastAt":"2023-06-25T13:47:23.000000Z",
+            "confirmSeconds":0
+         },
+         {
+            "paymentAmount":"0.1",
+            "paymentAssetId":"25dabac5-056a-48ff-b9f9-f67395dc407c",
+            "paymentAssetSymbol":"TRX",
+            "paymentAssetVersion":"",
+            "requiredConfirms":1,
+            "confirmations":5,
+            "txid":"f70c8b661a77a616788e5f52f11e412071a25e0bed78342e38825851f5c34f47",
+            "blockExplorerUrl":"https://tronscan.org/#/transaction/f70c8b661a77a616788e5f52f11e412071a25e0bed78342e38825851f5c34f47",
+            "broadcastAt":"2023-06-25T13:47:50.000000Z",
+            "confirmSeconds":0
+         }
+      ],
+
+      // if `with=payment` presented
+      "payment":{
+         "isMultiPay":true,
+         "isFullyPaid":true,
+         "totalTransactionsAmount":"0.3"
+      }
+        
     },
     "timestampMs": 1656561881048
 }

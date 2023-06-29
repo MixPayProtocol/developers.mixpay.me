@@ -154,3 +154,29 @@ On your server side, you can loop through the [payments-results API](/api/paymen
 
 It's recommended to implement the [Payment Callback](/api/payments/payment-callback) flow, for better performance.
 
+
+
+## Multi-payment
+
+If the user has underpaid, we can ask them to make an additional payment to complete the order.If you are using MixPay's Checkout Page,  multiple payments are already integrated, and you don't need to perform any additional actions. Simply check the `data.status` in the response to determine if it is equal to `success`.
+
+However, if you are using the [Raw API](/guides/using-raw-api) to build your own checkout page, and you want to support multiple payments, you need to perform the following steps.
+
+When calling the [payments-results API](/api/payments/payments-results):
+
+1. Use the `with` parameter with the value `payment,transactions` in the URI to retrieve the `payment` and `transactions` objects.
+2. Check the value of `data.payment.isFullyPaid`. If it is true, the payment has been fully paid; otherwise, it is false.
+   - If it is true, check if `data.status` is `success` to determine if the order is successful. If it is `pending`, it means the transactions are waiting for block confirmation.
+3. If the value of `data.payment.isFullyPaid` is false, subtract `data.payment.totalTransactionsAmount` from `data.payableAmount` to determine the remaining amount the user needs to pay.
+
+:::info
+Users have only 10 minutes to complete the payment (from the time MixPay receives the broadcast transaction).
+For multiple payments, the subsequent payment time may be reduced. You can call the [Onchain Payments](/api/payments/onchain-payments) endpoint once again with the same parameters as the initial call to refresh the payment time.
+Please note that each time you call the [Onchain Payments](https://chat.openai.com/api/payments/onchain-payments) endpoint, the payment time will be updated, and the `data.payableAmount` will be updated accordingly.
+:::
+
+Q: If a user makes multiple payments exceeding the order amount, will the payment be successful?
+A: Yes, it will be successful. In this case, check if `data.surplusStatus` is `yes`. The amount to be refunded is `data.surplusAmount`. Please refer to the MixPay Checkout Page for the specific refund process.
+
+Q: Can other payment methods (Mixin, Binance) support multiple payments?
+A: No. Only on-chain transfers support multiple payments.
