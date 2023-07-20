@@ -3,7 +3,7 @@
 MixPay payment link page for quickly accepting crypto payments.
 
 :::warning
-IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [short link](/api/payments/one-time-payment) in the production.
+IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [one time payment](/api/payments/one-time-payment) in the production.
 
 Although this method is more convenient, and you may be more inclined to use this method of splicing parameters, you need to pay attention that when using this method, people can easily in the browser change the parameters you set.
 
@@ -56,7 +56,7 @@ https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId
 ```
 
 :::info
-We recommend [short link](/api/payments/one-time-payment) if you want to use so many parameters.
+We recommend [one time payment](/api/payments/one-time-payment) if you want to use so many parameters.
 
 Although this method is more convenient, and you may be more inclined to use this method of splicing parameters, you need to pay attention that when using this method, people can easily in the browser change the parameters you set.
 :::

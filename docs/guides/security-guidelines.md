@@ -82,7 +82,7 @@ if ($payment_result["success"]) {
 ##  2. Storngly recommended: Always using short link for production
 
 
-As we mentioned above, malicious users can easily modify the parameters in the URL, and using [short link](/api/payments/one-time-payment) can eliminate the possibility of users passing parameters.
+As we mentioned above, malicious users can easily modify the parameters in the URL, and using [one time payment](/api/payments/one-time-payment) can eliminate the possibility of users passing parameters.
 
 The rules for short link are as follows:
 

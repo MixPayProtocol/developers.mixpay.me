@@ -172,8 +172,10 @@ When calling the [payments-results API](/api/payments/payments-results):
 
 :::info
 Users have only 10 minutes to complete the payment (from the time MixPay receives the broadcast transaction).
-For multiple payments, the subsequent payment time may be reduced. You can call the [Onchain Payments](/api/payments/onchain-payments) endpoint once again with the same parameters as the initial call to refresh the payment time.
-Please note that each time you call the [Onchain Payments](https://chat.openai.com/api/payments/onchain-payments) endpoint, the payment time will be updated, and the `data.payableAmount` will be updated accordingly.
+For multiple payments, the subsequent payment time may be reduced. 
+
+You need call the [refresh onchain payment API](/api/payments/refresh-onchain-payments) to refresh the payment time.
+Please note that each time you call the [refresh onchain payment API](/api/payments/refresh-onchain-payments), the payment time will be updated, and the `data.payableAmount` will be also updated accordingly.
 :::
 
 Q: If a user makes multiple payments exceeding the order amount, will the payment be successful?

@@ -84,7 +84,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Create Payment',
+      label: 'Payments',
       collapsed: false,
       items: [
         'api/payments/one-time-payment',
@@ -93,6 +93,7 @@ module.exports = {
         'api/payments/onchain-payments',
         'api/payments/payment-callback',
         'api/payments/mixin-memo-payments',
+        'api/payments/refresh-onchain-payments',
       ],
     },
     {
