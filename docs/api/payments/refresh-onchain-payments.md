@@ -8,7 +8,7 @@ If you [Using Raw API](/guides/using-raw-api) to collect payment, you need to ma
 
 Refresh a on-chain payment.
 
-:::warning
+:::info
 If you are using the MixPay Checkout Page, payment refresh are already handled, and you don't need to use this API. This API is for [Using Raw API](/guides/using-raw-api) only.
 :::
 
