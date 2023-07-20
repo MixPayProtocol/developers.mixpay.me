@@ -112,3 +112,7 @@ If the following conditions are meet:
 - and `isFullyPaid` equals `false`.
 
 Then is a user pays less than required, you can perform the specific action, like send a reminder email to inform them to pay the remaining balance.
+
+:::info
+If you using [one time payment](/api/payments/one-time-payment), just passing the original payment link for user to pay the remaining amount.
+:::
