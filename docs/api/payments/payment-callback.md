@@ -92,6 +92,7 @@ When calling the  [payments-results API](/api/payments/payments-results), with a
   "success": true,
   "message": "",
   "data": {
+    "status": "pending",
     .
     .
     .
