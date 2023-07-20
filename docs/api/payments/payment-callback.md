@@ -81,3 +81,33 @@ MixPay will send `success` and `fail` events by default. Other types of events n
 
 If you need callback events for more scenarios, you can contact us to discuss development.
 
+
+## Checking for paid_less
+
+When calling the  [payments-results API](/api/payments/payments-results), with a URL query `with=payment`, will return the `payment` object like the following:
+
+```
+{
+  "code": 0,
+  "success": true,
+  "message": "",
+  "data": {
+    .
+    .
+    .
+    "payment":{
+        "isMultiPay":true,
+        "isFullyPaid":false,
+        ...
+    }
+  }
+}
+```
+
+If the following conditions are meet: 
+
+- `data.status` is equal to `pending`;
+- and `data.payament.isMultiPay` is equals to `true`;
+- and `isFullyPaid` equals `false`.
+
+Then is a user pays less than required, you can perform the specific action, like send a reminder email to inform them to pay the remaining balance.

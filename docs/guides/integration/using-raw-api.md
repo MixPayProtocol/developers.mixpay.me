@@ -155,12 +155,13 @@ On your server side, you can loop through the [payments-results API](/api/paymen
 It's recommended to implement the [Payment Callback](/api/payments/payment-callback) flow, for better performance.
 
 
-
-## Multi-payment
+## Multi-payment (pay less)
 
 If the user has underpaid, we can ask them to make an additional payment to complete the order. If you are using MixPay's Checkout Page,  multiple payments are already handled, and you don't need to perform any additional actions. Simply check the `data.status` in the response to determine if it is equal to `success`.
 
-However, if you are using the [Raw API](/guides/using-raw-api) to build your own checkout page, and you want to support multiple payments, you need to perform the following steps.
+However, if you are using the [Raw API](/guides/using-raw-api) to build your own checkout page, you need to support multiple payments in order to improve the payments success rate. 
+
+To support multiple payments, you need to perform the following steps.
 
 When calling the [payments-results API](/api/payments/payments-results):
 
