@@ -158,7 +158,7 @@ It's recommended to implement the [Payment Callback](/api/payments/payment-callb
 
 ## Multi-payment
 
-If the user has underpaid, we can ask them to make an additional payment to complete the order.If you are using MixPay's Checkout Page,  multiple payments are already integrated, and you don't need to perform any additional actions. Simply check the `data.status` in the response to determine if it is equal to `success`.
+If the user has underpaid, we can ask them to make an additional payment to complete the order. If you are using MixPay's Checkout Page,  multiple payments are already handled, and you don't need to perform any additional actions. Simply check the `data.status` in the response to determine if it is equal to `success`.
 
 However, if you are using the [Raw API](/guides/using-raw-api) to build your own checkout page, and you want to support multiple payments, you need to perform the following steps.
 

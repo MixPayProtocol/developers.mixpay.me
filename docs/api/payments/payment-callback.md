@@ -77,6 +77,7 @@ MixPay will send `success` and `fail` events by default. Other types of events n
 | fail | When the user fails to pay. You can get failed status in payment result. In this case, paymentAmount is not empty, which represents the amount of payment the user has made.|
 | settle | When MixPay settlement is completed, You can get settleAmount and other settle info in payment result.|
 | pending | When the user has paid, but we must wait for the number of confirmations to reach standard before asserting that the payment is successful.|
+| paid_less | When a user underpays, this event will be triggered. By subscribing to this event, you can enhance the success rate of user payments. When a user pays less than required, you can send an email to them, reminding them to pay the remaining balance. |
 
 If you need callback events for more scenarios, you can contact us to discuss development.
 
