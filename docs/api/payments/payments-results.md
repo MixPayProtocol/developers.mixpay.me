@@ -47,7 +47,7 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
     "success": true,
     "message": "",
     "data": {
-        // `unpaid`, `pending`(processing), `failed` and `success`
+        // `unpaid`, `pending`(processing), `failed`, `auditing` and `success`
         "status": "success",
         "quoteAmount": "0.01",
         "quoteSymbol": "USD",
@@ -145,7 +145,7 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
 ```
 
 :::info
-This response status returns `unpaid`, `pending`(processing), `failed` and `success`.
+This response status returns `unpaid`, `pending`(processing), `failed`, `auditing` and `success`.
 :::
 
 ## Checking for success payment
