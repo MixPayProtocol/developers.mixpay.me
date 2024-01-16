@@ -78,12 +78,12 @@ There are several parameters here, used to specify the default behavior of the C
 2. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
 3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
 4. `payerEmail` is used to specify the email address of the payer to receive the payment results. `payerEmail` must be valid, or you can not create a payment. 
-5. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=mobile` can force the mobile side to use the **Mobile Universal template**.
+5. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=iframe` can force to use the **Mobile Universal template**.
 
 | template name | example |
 |----|----|
 | Desktop Template | ![Desktop Template](./pc-template.png) |
-| Mobile Universal Template | ![Mobile Universal Template](./mobile-universal-template.png) |
+| Mobile Universal Template(`iframe`) | ![Mobile Universal Template](./mobile-universal-template.png) |
 | Mobile Wallet Template | ![Mobile Wallet Template](./mobile-wallet-template.png) |
 
 ## Special Events For Payment Link
@@ -92,6 +92,7 @@ There are several parameters here, used to specify the default behavior of the C
 
 ```html
 <iframe src="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a
+&style=iframe
 &settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
 &quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
 &quoteAmount=10
