@@ -2,7 +2,7 @@
 slug: /guides/using-paylink
 ---
 
-# Using Payment Link
+# Payment Link (Checkout Page)
 
 You can use our MixPay payment page to create a MixPay payment. Payment link is the most convenient way of integrating MixPay.
 
