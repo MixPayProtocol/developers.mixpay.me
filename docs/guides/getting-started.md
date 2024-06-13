@@ -89,9 +89,8 @@ The following are the basic steps for integrating MixPay:
 
 Furthermore, we offer ready-to-use payment solutions for a variety of use cases:
 
-* [Using Short Link](/api/payments/one-time-payment)
+* [Using Short Link - Checkout Page](/api/payments/one-time-payment)
 * [Using JS SDK](/guides/using-js-sdk)
-* [Using Raw API](/guides/using-raw-api)
 * [Shopify Plugin](/guides/shopify-plugin)
 * [WooCommerce Plugin](/guides/woocommerce-plugin)
 * [Using Swap](/api/payments/mixin-memo-payments)

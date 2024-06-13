@@ -10,7 +10,6 @@ module.exports = {
       items: [
         'guides/integration/using-paylink',
         'guides/integration/using-js-sdk',
-        'guides/integration/using-raw-api',
         'guides/integration/shopify-plugin',
         'guides/integration/woocommerce-plugin',
       ],
@@ -34,7 +33,6 @@ module.exports = {
         'guides/solutions/pos',
         'guides/solutions/online-payment',
         'guides/solutions/guaranteed-trades',
-        'guides/solutions/instant-exchange',
       ],
     },
     {
@@ -90,9 +88,7 @@ module.exports = {
         'api/payments/one-time-payment',
         'api/payments/pay',
         'api/payments/accepting-payments',
-        'api/payments/onchain-payments',
         'api/payments/payment-callback',
-        'api/payments/mixin-memo-payments',
         'api/payments/refresh-onchain-payments',
       ],
     },
