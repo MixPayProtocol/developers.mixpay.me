@@ -87,7 +87,6 @@ module.exports = {
       items: [
         'api/payments/one-time-payment',
         'api/payments/pay',
-        'api/payments/accepting-payments',
         'api/payments/payment-callback',
         'api/payments/refresh-onchain-payments',
       ],
