@@ -72,13 +72,15 @@ returnTo=https%3A%2F%2Fgoogle.com
 
 
 ## Special Parameters For Payment Link
+
 There are several parameters here, used to specify the default behavior of the Checkout Page(both of permanent payment link, One-time payment link, and universal payment link).
 
 1. `amount` is the total payment amount according to the `quoteAssetId`, and takes priority over `quoteAmount`.
 2. `paymentAssetId` is used to specify the coin that the user wants to pay with, and you can see the supported asset id in [Payment Assets](/api/assets/payment-assets) in UUID format.
-3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`, or `binance`.
-4. `payerEmail` is used to specify the email address of the payer to receive the payment results. `payerEmail` must be valid, or you can not create a payment. 
-5. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=iframe` can force to use the **Mobile Universal template**.
+3. `paymentMethod` is used to specify the payment type, which can be `crypto`, `mixpayplus`.
+4. `paymentWallet` is used to specify the payment wallet, which can be `gateio`, `binance`.
+5. `payerEmail` is used to specify the email address of the payer to receive the payment results. `payerEmail` must be valid, or you can not create a payment. 
+6. `style` The page is divided into **Desktop template**, **Mobile Universal template**, and **Mobile Wallet template**. Setting `style=iframe` can force to use the **Mobile Universal template**.
 
 | template name | example |
 |----|----|
