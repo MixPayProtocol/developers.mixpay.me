@@ -23,7 +23,7 @@ https://api.mixpay.me/v1/payments_info
 
 ```bash
 curl -i -X GET -G https://api.mixpay.me/v1/payments_info \
-  -d "traceId"="a0d7791408776b47eb1dd3f94ed15d6a" \
+  -d "traceId"="8e69e534-d0c4-3e04-8b61-37a73cd9e7d7" \
   -d "clientId"="c6d0c728-2624-429b-8e0d-d9d19b6592fa" 
 ```
 

@@ -37,7 +37,7 @@ If you want `transactions` and `payment`, you can pass it like `with=payment,tra
 
 ```json
 curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
--d "traceId"="a0d7791408776b47eb1dd3f94ed15d6a"
+-d "traceId"="8e69e534-d0c4-3e04-8b61-37a73cd9e7d7"
 ```
 
 ```json
@@ -92,7 +92,7 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
         // If status is `success`, will return `returnTo` when 
         // you create a payment, failed will return `failedReturnTo`'s value.
         "returnTo": "https://www.exmaple.com/show_payment_success?order_id=xxxxx",
-        "traceId": "a0d7791408776b47eb1dd3f94ed15d6a",
+        "traceId": "8e69e534-d0c4-3e04-8b61-37a73cd9e7d7",
 
         // settle status
         // pending - to be settled
