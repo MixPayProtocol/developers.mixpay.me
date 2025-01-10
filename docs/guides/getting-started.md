@@ -6,7 +6,7 @@ This document aims to show you how to quickly use MixPay for receiving payments,
 
 Assuming you are now preparing to sell coffee, with each cup priced at 5 dollars. Clicking the MixPay payment link below will allow you to quickly experience the convenience of MixPay's payment process.
 
-> [`https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&quoteAssetId=usd&quoteAmount=5`](https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&quoteAssetId=usd&quoteAmount=5)
+> [`https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7&quoteAssetId=usd&quoteAmount=5`](https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7&quoteAssetId=usd&quoteAmount=5)
 
 :::info
 In the link above, the `payeeId` represents the payee as MixPay, which you can replace with your own. Additionally, you can change the `quoteAmount` in the link. Please note that this is just an example, and as you can see, you can freely change the `quoteAmount`. Therefore, this is not the best practice for MixPay.

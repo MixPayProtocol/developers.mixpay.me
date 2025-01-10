@@ -25,7 +25,7 @@ Please checkout the [Security Guidelines](/guides/security-guidelines).
 :::
 
 
-<a href="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=&returnTo=https%3A%2F%2Fgoogle.com" className="width-300"> 
+<a href="https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=&returnTo=https%3A%2F%2Fgoogle.com" className="width-300"> 
 
 ![](./pay-with-crypto-btn.png)
 
@@ -34,7 +34,7 @@ Please checkout the [Security Guidelines](/guides/security-guidelines).
 For better reference, the "Pay with crypto" button's link is:
 
 ```
-https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a
+https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7
 &settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
 &quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
 &quoteAmount=10
@@ -54,7 +54,7 @@ When customers are on the checkout page, provide a "Pay with Crypto" button (wit
 Below is how to construct the URL parameters, according to the example URL above: 
 
 ```bash
-payeeId=a0d7791408776b47eb1dd3f94ed15d6a
+payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7
 settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
 quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
 quoteAmount=10
@@ -93,7 +93,7 @@ There are several parameters here, used to specify the default behavior of the C
 1. if you want to embed the checkout page into your website by using an iframe. there is an example for you.
 
 ```html
-<iframe src="https://mixpay.me/pay?payeeId=a0d7791408776b47eb1dd3f94ed15d6a
+<iframe src="https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7
 &style=iframe
 &settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
 &quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
