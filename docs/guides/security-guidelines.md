@@ -3,8 +3,13 @@
 This guide will show you the security must do and best practice when using MixPay.
 
 
-## 1. MUST: Always verify the quote amount and the payeeId and the quoteAssetId
+## 0. MixPay callback server IP whitelist
 
+In your callback endpoint. Please **only** allow MixPay callback server to call your callback API:
+
+> MixPay callback server IP: 52.198.117.57
+
+## 1. MUST: Always verify the quote amount and the payeeId and the quoteAssetId
 
 **Never just rely on the [payments-results API](/api/payments/payments-results)'s return `data.status` = `success` to mark an order is successfully paid.**
 
@@ -46,6 +51,12 @@ The right way to do is - when your callback endpoint receives a call, you MUST d
 Here is the example in PHP:
 
 ```php
+
+// Checking the request IP is come from MixPay callback server
+if ($_SERVER['REMOTE_ADDR'] !== '52.198.117.57') {
+    throw new Exception('forbidden');
+}
+
 // Get the order from database
 $order = Order::find($order_id);
 
