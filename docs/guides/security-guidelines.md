@@ -90,7 +90,7 @@ if ($payment_result["success"]) {
 }
 ```
 
-##  2. Storngly recommended: Always using short link for production
+##  2. Strongly recommended: Always using short link for production
 
 
 As we mentioned above, malicious users can easily modify the parameters in the URL, and using [one time payment](/api/payments/one-time-payment) can eliminate the possibility of users passing parameters.
@@ -107,6 +107,6 @@ The rules for short link are as follows:
 
 You can using the Mixin API [GET /snapshots](https://developers.mixin.one/docs/api/transfer/snapshots) for monitoring the crypto coming into your robot's wallet. 
 
-Only when the money is really recived, then the order can be mark as paid.
+Only when the money is really received, then the order can be mark as paid.
 
 
