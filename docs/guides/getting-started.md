@@ -100,7 +100,6 @@ Furthermore, we offer ready-to-use payment solutions for a variety of use cases:
 
 * [Point-of-Sale (PoS)](/guides/solutions/pos)
 * [Online Payment](/guides/solutions/online-payment)
-* [Guaranteed Trades](/guides/solutions/guaranteed-trades)
 * [Instant Exchange](/guides/solutions/instant-exchange)
 * ......
 

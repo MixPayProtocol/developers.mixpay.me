@@ -32,7 +32,6 @@ module.exports = {
       items: [
         'guides/solutions/pos',
         'guides/solutions/online-payment',
-        'guides/solutions/guaranteed-trades',
       ],
     },
     {
