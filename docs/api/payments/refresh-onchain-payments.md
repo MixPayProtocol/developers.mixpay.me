@@ -4,6 +4,16 @@ In MixPay Checkout Page, in order to ensure the calculated payment amount is cor
 
 If you [Using Raw API](/guides/using-raw-api) to collect payment, you need to manually refresh the payment, for getting the most updated payment amount.
 
+
+:::warning
+Please note using raw API is deprecated. Please using [one time payment](/api/payments/one-time-payment) and our checkout page in the production.
+
+Always using [one time payment](/api/payments/one-time-payment) for production.
+
+Please checkout the [Security Guidelines](/guides/security-guidelines).
+:::
+
+
 ## POST /payments/refresh
 
 Refresh a on-chain payment.

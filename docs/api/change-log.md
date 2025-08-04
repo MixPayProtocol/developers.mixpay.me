@@ -1,6 +1,10 @@
 # Change Log
 
 
+2025-08-04
+
+* raw api is deprecated, please use [one time payment](/api/payments/one-time-payment) api instead.
+
 2023-02-24
 
 * Update endpoint for Short Link: 

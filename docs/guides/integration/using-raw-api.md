@@ -9,6 +9,9 @@ This method is the most flexible way to make a MixPay payment.
 
 It's suitable for scenarios that can not use a browser, such as the Mobile Native App.
 
+:::warning
+Please note using raw API is deprecated. Please using [one time payment](/api/payments/one-time-payment) and our checkout page in the production.
+:::
 
 ## Constructing the accept payment view
 

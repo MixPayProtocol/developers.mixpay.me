@@ -85,9 +85,9 @@ module.exports = {
       collapsed: false,
       items: [
         'api/payments/one-time-payment',
-        'api/payments/pay',
         'api/payments/payment-callback',
-        'api/payments/refresh-onchain-payments',
+        'api/payments/pay',
+        // 'api/payments/refresh-onchain-payments',
       ],
     },
     {

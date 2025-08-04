@@ -90,7 +90,7 @@ if ($payment_result["success"]) {
 }
 ```
 
-##  2. Strongly recommended: Always using short link for production
+##  2. Strongly recommended: Always one time payment for production
 
 
 As we mentioned above, malicious users can easily modify the parameters in the URL, and using [one time payment](/api/payments/one-time-payment) can eliminate the possibility of users passing parameters.

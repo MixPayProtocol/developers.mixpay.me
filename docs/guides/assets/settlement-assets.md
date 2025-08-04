@@ -6,11 +6,11 @@ slug: /guides/settlement-assets
 
 List all the settlement assets.
 
-MixPay is decentralised and supports Mixin Messenger and any on-chain wallet for payments. MixPay is very flexible because of its underlying ability to separate the three parts of the quote, payment and settlement. MixPay supports three settlement modes simultaneously: regular user, robot, and multi-signature group.
+MixPay is decentralised and supports any on-chain wallet for payments. MixPay is very flexible because of its underlying ability to separate the three parts of the quote, payment and settlement. MixPay supports three settlement modes simultaneously: regular user, robot, and multi-signature group.
 
 ## Settlement Assets List
 
-Detailed information about payment assets [API](/api/assets/settlement-assets).
+Detailed information about payment assets, you can refer to this [API](/api/assets/settlement-assets).
 
 ### **Cryptocurrencies**
 

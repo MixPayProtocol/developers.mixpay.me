@@ -1,4 +1,4 @@
-# Using Paylink
+# Using Paylink - only for testing
 
 MixPay payment link page for quickly accepting crypto payments.
 
@@ -6,6 +6,8 @@ MixPay payment link page for quickly accepting crypto payments.
 IMPORTANT: The paylink example is for new users to understand how the MixPay payment flow. We recommend using [one time payment](/api/payments/one-time-payment) in the production.
 
 Although this method is more convenient, and you may be more inclined to use this method of splicing parameters, you need to pay attention that when using this method, people can easily in the browser change the parameters you set.
+
+Always using [one time payment](/api/payments/one-time-payment) for production.
 
 Please checkout the [Security Guidelines](/guides/security-guidelines).
 :::

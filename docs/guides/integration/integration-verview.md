@@ -29,10 +29,7 @@ Open the MixPay App in the Mixin App, click the "Payment History" entry like bel
 There are several ways you can integrate MixPay to accept crypto payments:
 
 1. [Checkout Page](/guides/using-paylink) -  MixPay hosted web page; all user interaction happened on this page; you can use it as a "Pay with Crypto" button.
-2. [JS Plugin](/guides/shopify-plugin) -  Like Checkout Page to handle all user payment close interaction, but on your web page, you can have more control over it.
-3. [Raw API call](/guides/using-raw-api) - Above to method are in the browser; if you are in the circumstance that can't use the browser, maybe this is your choice.
-4. [Shopify Plugin](/guides/shopify-plugin).
-5. [WordPress WooCommerce Plugin](/guides/woocommerce-plugin).
+2. [Shopify Plugin](/guides/shopify-plugin).
+3. [WordPress WooCommerce Plugin](/guides/woocommerce-plugin).
 
-Here is just a brief of the integration method available; for more detailed instructions, please visit the doc entry at the left menu.
 
