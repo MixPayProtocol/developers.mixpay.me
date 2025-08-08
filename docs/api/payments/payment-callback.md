@@ -1,11 +1,12 @@
 # Payment Callback
 
-When creating a payment, you can pass a `callbackUrl` parameter to the MixPay API. MixPay will send a POST request to your callbackUrl. After receiving the request, you can request [it](/api/payments/payments-results) to obtain the payment result.
+When creating a payment, you can pass a `callbackUrl` parameter to the MixPay API. MixPay will send a POST request to your callbackUrl. After receiving the request, you can request [payment result API](/api/payments/payments-results) to obtain the payment result.
 
+
+> After a successful payment, MixPay will send a POST request to this URL from our server. For security reasons, the URL must use HTTPS; For more details, see [Callback Event](/api/payments/payment-callback). 
+If the request is submitted using the `application/x-www-form-urlencoded` content type, you must [URL-encode](https://www.w3schools.com/tags/ref_urlencode.ASP) the value, but if using `application/json`, URL encoding is not required. 
 
 :::warning
-
-If you want to use callback.
 
 Please checkout the [Security Guidelines](/guides/security-guidelines) first!!! 
 
