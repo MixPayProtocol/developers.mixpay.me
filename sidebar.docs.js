@@ -9,7 +9,6 @@ module.exports = {
       collapsed: false,
       items: [
         'guides/integration/using-paylink',
-        'guides/integration/using-js-sdk',
         'guides/integration/shopify-plugin',
         'guides/integration/woocommerce-plugin',
       ],
