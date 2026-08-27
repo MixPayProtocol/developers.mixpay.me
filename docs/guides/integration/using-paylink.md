@@ -47,7 +47,7 @@ When customers are on the checkout page, provide a "Pay with Crypto" button (wit
 
 1. When customers click the button, jump to our MixPay payment page;
 2. On our MixPay payment page, customers pay the crypto coin;
-3. We will redirect you to your site after the customer finishes the payment.
+3. After success, a non-iframe result page may navigate to `returnTo`. Automatic navigation is conditional and is not proof of payment.
 
 ## Parameters explain
 
@@ -68,7 +68,7 @@ returnTo=https%3A%2F%2Fgoogle.com
 3. `quoteAssetId` is the cryptocurrency in UUID format, and you can see the supported asset id in [Quote Assets](/api/assets/quote-assets).
 4. `quoteAmount` is the total payment amount according to the `quoteAssetId`.
 5. `orderId`   -   Unique in your system. String lengths **between 6 and 36 must be letters, numbers, dashes, underscores, and NO space. `orderId` and `payeeId` make a payment unique. 
-6. `returnTo` when the payment is finished, the customer will be redirected to this URL. Generally will be the order detail page.
+6. `returnTo` is the preferred destination after a successful payment. Automatic navigation can be suppressed for iframe, surplus/refund, or merchant-controlled return flows and must not be used as a payment notification.
 
 
 ## Special Parameters For Payment Link
@@ -89,39 +89,62 @@ There are several parameters here, used to specify the default behavior of the C
 | Mobile Universal Template(`iframe`) | ![Mobile Universal Template](./mobile-universal-template.png) |
 | Mobile Wallet Template | ![Mobile Wallet Template](./mobile-wallet-template.png) |
 
-## Special Events For Payment Link
+## Embedding the Payment Link
 
-1. if you want to embed the checkout page into your website by using an iframe. there is an example for you.
+Set `style=iframe` to embed the hosted checkout. The result page sends UI notifications to its top-level parent with this shape:
+
+```json
+{
+  "type": "MIXPAY_PAYMENT",
+  "data": {
+    "traceId": "39878c67-a749-4e2f-a495-743d139db9f2",
+    "clientId": "bb5bdb53-075e-4b40-a6cc-1d81b8c2f78d",
+    "status": "confirming"
+  }
+}
+```
+
+Treat the message as a checkout UI notification, not as an authoritative or guaranteed delivery channel. Validate both `event.origin` and `event.source`, then query `payments_result` from your server before fulfillment.
 
 ```html
-<iframe src="https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7
-&style=iframe
-&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa
-&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5
-&quoteAmount=10
-&orderId=your_order_id" style="width:100%;height:100%;border:none"></iframe>
+<iframe
+  id="mixpay-checkout"
+  src="https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7&style=iframe&settlementAssetId=c6d0c728-2624-429b-8e0d-d9d19b6592fa&quoteAssetId=4d8c508b-91c5-375b-92b0-ee702ed2dac5&quoteAmount=10&orderId=your_order_id"
+  style="width:100%;height:100%;border:none"
+></iframe>
+
 <script>
-  window.addEventListener('message', function(event) {
-    if(event.data.type === 'MIXPAY_PAYMENT') {
-      if (event.data.data.status === 'pending') {
-        // To do something when the payment is confirmed.
-      }
+  const checkoutFrame = document.querySelector('#mixpay-checkout');
+  const expectedOrigin = new URL(checkoutFrame.src).origin;
 
-      if (event.data.data.status === 'success') {
-        // To do something when the payment is success.
-      }
+  window.addEventListener('message', async function (event) {
+    if (event.source !== checkoutFrame.contentWindow) return;
+    if (event.origin !== expectedOrigin) return;
+    if (!event.data || event.data.type !== 'MIXPAY_PAYMENT') return;
 
-      if (event.data.data.status === 'failed') {
-        // To do something when the payment is failed.
-      }
+    const snapshot = event.data.data;
+
+    // Send snapshot.traceId to your server. Your server must query
+    // GET /v1/payments_result and verify the stored order fields.
+    const result = await getVerifiedResultFromYourServer(snapshot.traceId);
+
+    if (result.status === 'success') {
+      completeCheckoutOnce(result);
+    } else if (result.status === 'failed') {
+      showPaymentFailure(result.failureCode, result.failureReason);
+    } else if (result.status === 'paid_less') {
+      showTopUpProgress(result);
+    } else {
+      showPaymentInProgress(result.status);
     }
   });
 </script>
 ```
 
+`unpaid`, `confirming`, `paid_less`, `pending`, and `auditing` are non-terminal. When an iframe order is underpaid, the hosted flow may navigate the iframe back to the payment page so the payer can send the remaining amount. Keep the original merchant order, `traceId`, and existing `clientId` channel, but use only the latest payment asset, amount, destination, and Tag/Memo returned by the refreshed payment information.
+
+When `style=iframe` is used, the hosted page does not automatically redirect the top-level merchant page after success. The parent page is responsible for its own navigation. Do not rely on iframe message frequency, ordering, or continued delivery.
 
 ## Getting the result
 
-At this point, customers are paying crypto using our Payment Link; how can you get the paying results?
-
-You can use the [Payment Callback](/api/payments/payment-callback) to get the feedback.
+Configure a [Payment Callback](/api/payments/payment-callback) for prompt server notification, and keep server-side polling as a fallback. In both cases, query [`GET /payments_result`](/api/payments/payments-results) and fulfill only after verifying an authoritative `success` result. See [Payment Lifecycle](/api/payments/payment-lifecycle).

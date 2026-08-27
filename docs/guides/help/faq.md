@@ -24,7 +24,7 @@ Every time [create a payment in MixPay](/guides/integration-verview#how-to-integ
 
 ## What about refund logic? How can I deal with it?
 
-If a customer pays with a "tolerate period" (set by the `expiredTimestamp` when you create a payment) expired payment, if is "Pay with Mixin wallet", the crypto assets will refund, and the payment result will be `payment overtime`. If is "Pay using an on-chain Wallet", due to the crypto transfer's nature, we can not refund the money directly, we must get the customer's wallet address first, in this scenario, you can instruct the customer to [contact our customer service](https://help.mixpay.me/en/articles/6836092-how-to-contact-customer-service). 
+A payment result and a refund are separate lifecycles. When a payment returns `failed`, use `failureCode` to determine the reason, but do not treat that status as proof that a refund has completed. Depending on the payment method and failure reason, MixPay may refund automatically or require the payer's return address and manual review. For an on-chain late or invalid payment, instruct the payer to [contact customer service](https://help.mixpay.me/en/articles/6836092-how-to-contact-customer-service) and provide the order and transaction identifiers.
 
 
 ## What is Mixin & Mixin Network, and what is the relationship between MixPay and them?

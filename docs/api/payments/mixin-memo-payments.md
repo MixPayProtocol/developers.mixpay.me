@@ -18,7 +18,7 @@ SOURCE|PAYEE|SETTLEMENTASSETID
 |  Param | Optional | Description |
 | --- | --- | --- |
 | SOURCE | <span class="required">*required</span> | Must be `swap` |
-| PAYEE | <span class="required">*required</span> | The payee ID. Please refer to the [Three types of accounts](/guides/integration-verview#three-types-of-account) and [how to get a payee ID](/guides/integration-verview#payee-id). |
+| PAYEE | <span class="required">*required</span> | The payee ID. See [Account types](/guides/getting-started#account) and [How to get a payeeId](/guides/getting-started#payee-id). |
 | SETTLEMENTASSETID | <span class="required">*required</span> | Receipt crypto. [Here](/api/assets/settlement-assets) you can see the settlement cryptos supported by MixPay. |
 
 For example: 

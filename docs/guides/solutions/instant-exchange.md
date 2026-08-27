@@ -114,7 +114,7 @@ Response
     "message": "",
     "data": {
         "isChain": false,
-        "expire": 1648191480,// Payment expiration time
+        "expire": 1648191480,// Current quote or payment-instruction refresh deadline
         "seconds": 900,
         "payeeId": "834c17e1-1427-434a-a280-1b3cfee05111",
         "traceId": "4f7b0b8c-5112-4c25-9cea-4281ebf0d2dd",// The trace id when the user pays, to get the result of payment. And trace for mixin.
@@ -147,7 +147,7 @@ If it's an on-chain payment, in the JSON Response, there is a key call `destina
 
 ## Step 4 - Checking the payment results
 
-Finally, use the [payments-results API](/api/payments/payments-results) to loop query payments result; the parameter is the `traceId` you generated. And the response is the `status` of payment. The `status` has three parameters, unpaid failed and succeeded.
+Finally, query [`GET /payments_result`](/api/payments/payments-results) from your server using `traceId` and handle every status in the [Payment Lifecycle](/api/payments/payment-lifecycle). Continue waiting for all non-terminal states, and exchange or release assets only after verifying `status === "success"` together with the expected payee, quote asset, and amount.
 
 ## Q & A
 

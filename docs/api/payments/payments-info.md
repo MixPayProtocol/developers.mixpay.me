@@ -16,8 +16,8 @@ https://api.mixpay.me/v1/payments_info
 
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
-| `traceId` | <span class="required">*required</span> | String | UUID, varchar(36), used to prevent double payment. |
-| `clientId` | optional  | String | UUID of client of the payment. |
+| `traceId` | <span class="required">*required</span> | String | UUID that identifies the order-level payment lifecycle. |
+| `clientId` | <span class="required">*required</span> | String | UUID of the payment channel or attempt under `traceId`. It does not have an independent payment result. |
 
 ### Example request - Payments Info.
 
@@ -36,7 +36,8 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_info \
   "message":"",
   "data":{
     "isChain":false,
-    // Payment expiration time
+    // Current quote or payment-instruction refresh deadline.
+    // Use payments_result.expiredAt for the overall order deadline.
     "expire":1648191480,
     "seconds":900,
     "payeeId":"834c17e1-1427-434a-a280-1b3cfee05111",
@@ -75,12 +76,13 @@ Or on-chain Payment:
   "message":"",
   "data":{
     "isChain":true,
-    // Payment expiration time
+    // Current quote or payment-address refresh deadline.
+    // Use payments_result.expiredAt for the overall order deadline.
     "expire":1647179141,
     "seconds":600,
     "payeeId":"834c17e1-1427-434a-a280-1b3cfee05111",
-    // The trace id when the user pays,
-    to get the result of payment"traceId":"1b638d3f-e156-4621-87fd-778a410f4884",
+    // The trace id when the user pays, used to get the payment result.
+    "traceId":"1b638d3f-e156-4621-87fd-778a410f4884",
     "clientId":"8f263764-3103-4be2-aff1-0530d6976e86",
     "paymentAssetId":"c6d0c728-2624-429b-8e0d-d9d19b6592fa",
     "settlementAssetId":"eea900a8-b327-488c-8d8d-1428702fe240",

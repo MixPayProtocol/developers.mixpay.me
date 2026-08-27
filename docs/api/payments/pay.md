@@ -35,8 +35,8 @@ https://mixpay.me/pay
 |  Param | Optional | Type | Description |
 | --- | --- | --- | --- |
 | `payeeId` | <span class="required">*required</span> | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
-| `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. `orderId` and `payeeId` make a payment unique. |
-| `traceId` | optional | String |  UUID, used to prevent double payment and to check the payment result. You should use `orderId` instead.  |
+| `orderId` | optional | String | Merchant order identifier, unique in your system. It must contain 6-36 letters, numbers, dashes, or underscores, with no spaces. |
+| `traceId` | optional | String | UUID that identifies the order-level payment lifecycle, prevents duplicate payment, and is used to query Payment Result. Do not reuse a terminal `traceId`. |
 | `settlementAssetId` | optional | String | `assetId` of settlement cryptocurrency. Settlement assets you prefer. If left blank, the payee will receive the cryptocurrency the user pays for. But you need to pay attention to the `strictMode` field.For more options, see [here](/api/assets/settlement-assets). |
 | `strictMode` | optional | Integer | You can set `0` or `1`. Default `0`. `1` means that the payment must be settled strictly according to the currency set by settlementAssetId. See [here](/api/strict-mode) for more details.|
 | `quoteAssetId` | optional | String | `assetId` of quote cryptocurrency. You can see the supported asset id in [Quote Assets](/api/assets/quote-assets).|
@@ -45,8 +45,8 @@ https://mixpay.me/pay
 | `settlementMemo` | optional | String | maximum 200. A memo is similar to Mixin Snapshots, this parameter you can customise. |
 | `returnTo` | optional | String | After successful payment, the page will jump to `returnTo` URL. |
 | `failedReturnTo` | optional | String | After payment failure, the page will jump to `failedReturnTo` URL. |
-| `callbackUrl` | optional | String | After a successful payment, MixPay will send a POST request to this URL from our server. For security reasons, the URL must use HTTPS; For more details, see [Callback Event](/api/payments/payment-callback). If the request is submitted using the `application/x-www-form-urlencoded` content type, you must [URL-encode](https://www.w3schools.com/tags/ref_urlencode.ASP) the value, but if using `application/json`, URL encoding is not required.  |
-| `expiredTimestamp` | optional | int | Set a expired [timestamp](https://en.wikipedia.org/wiki/Unix_time). This value must be greater than 10s and less than 2880min. After this period, the payment result status field will be marked as `failed`, and the `failureReason` will be `Payment overtime`. If you are not setting this value, the payer can have unlimited time to complete this payment. |
+| `callbackUrl` | optional | String | HTTPS endpoint that receives lifecycle notifications. Treat each callback as a signal and query Payment Result for the authoritative state. |
+| `expiredTimestamp` | optional | Integer | Unix timestamp that caps the payment deadline. The effective deadline is the earliest applicable MixPay, merchant, or payment-method limit. Omitting it does not make the order valid indefinitely. |
 
 
 ### Example request - Get Payment Link

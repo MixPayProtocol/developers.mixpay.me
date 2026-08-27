@@ -83,6 +83,7 @@ module.exports = {
       label: 'Payments',
       collapsed: false,
       items: [
+        'api/payments/payment-lifecycle',
         'api/payments/one-time-payment',
         'api/payments/payment-callback',
         'api/payments/pay',

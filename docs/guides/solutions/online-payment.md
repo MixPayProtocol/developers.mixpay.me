@@ -73,7 +73,7 @@ When you've generated the payment link, you can place the payment link on a butt
 
 ### Step 3 - Look query the payment results
 
-Then you can use this [API](/api/payments/payments-results) to loop query payment results. The parameter is the `traceId` you generated. And the response is the `status` of payment. The `status` has three parameters, unpaid, failed and success.
+Poll [`GET /payments_result`](/api/payments/payments-results) from your server using the generated `traceId`. The lifecycle can return `unpaid`, `confirming`, `paid_less`, `pending`, `auditing`, `success`, or `failed`; only `success` and `failed` are terminal. Keep polling all non-terminal statuses, and fulfill the merchant order only after the server verifies `success`, `payeeId`, `quoteAmount`, and `quoteAssetId`. See [Payment Lifecycle](/api/payments/payment-lifecycle).
 
 ## JS Plugin
 

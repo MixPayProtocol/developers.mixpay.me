@@ -4,7 +4,12 @@ slug: /api/error-codes
 
 # Error Codes
 
-MixPay API response error code.
+MixPay uses two code namespaces:
+
+- top-level API response `code` reports whether an API request was accepted;
+- `payments_result.data.failureCode` reports why an accepted payment order reached `failed`.
+
+Do not treat them as interchangeable. `failureCode` is returned as a string, while the top-level API `code` is normally a number.
 
 ### Global error response
 
@@ -20,7 +25,7 @@ Global error response, example:
 }
 ```
 
-### Basic code
+## API response codes
 
 | Code | Message |
 | :-- | :-- |
@@ -41,6 +46,8 @@ Global error response, example:
 | 10009 | Withdrawals are suspended temporarily due to system maintenance. If you have any questions, please contact customer service. |
 | 10010 | Insufficient balance of assets. |
 | 10011 | Parameter error |
+| 10020 | The trace or merchant order has already completed, or is already attached to an order that cannot be recreated. |
+| 10032 | For the payment-cancellation endpoint, the payment cannot be cancelled in its current state; the endpoint returns HTTP 409. Other endpoints can reuse this API code with endpoint-specific meaning. |
 | 10033 | The same user can be added only 3 times in 24 hours. |
 | 10034 | Price exception, please try again later. |
 | 10035 | The multisigId does not belong to the token. |
@@ -52,8 +59,37 @@ Global error response, example:
 | 10042 | More than 20 multi-signature group bindings. |
 | 10043 | More than 20 robot bindings. |
 | 10044 | Please set the name of this multi-signature group first. |
+| 10061 | The callback URL must use HTTPS. |
+| 10062 | The requested order does not exist. |
+| 10063 | The requested expiration is below the accepted minimum. |
+| 10064 | The requested expiration exceeds the accepted maximum. |
+| 10065 | The trace has expired or is already in a terminal failed state and cannot create another payment. |
+| 10084 | The trace is not available for the requested operation. |
+| 10131 | The requested callback event is invalid. |
 
-### Reason for refund
+The API response `message` is intended for diagnostics and can change. Branch on the endpoint and `code` together.
+
+## Payment-result failure codes
+
+When [`payments_result`](/api/payments/payments-results) returns `data.status === "failed"`, inspect these values:
+
+| `failureCode` | Meaning |
+| :-- | :-- |
+| `40000` | No valid payment was received before the payment deadline, or a fully recognized payment did not obtain the required confirmations before the server-side confirmation deadline. |
+| `40020` | A wrong payment asset was received and the payment cannot be corrected. |
+| `40024` | The payment deadline passed while the recognized amount was insufficient. |
+| `40032` | The payment was cancelled. |
+| `10095` | The payment was rejected during risk, compliance, or manual review. |
+
+:::warning Cancellation codes
+For payment cancellation, `10032` and `40032` describe different stages. `10032` is the immediate API error returned when cancellation is not allowed. `40032` is the payment-result failure code after a cancellation is accepted and the order reaches `failed`.
+:::
+
+A failed result does not mean that a refund has completed. Refund and settlement processing have separate lifecycles.
+
+## Reason for refund
+
+The following codes can appear in legacy refund flows. New payment integrations should use the payment-result table above for terminal order handling.
 
 | Code | Message |
 | :-- | :-- |
@@ -75,7 +111,7 @@ Global error response, example:
 | 10071 | The current payment currency does not meet the minimum limit.|
 | 10072 | The current payment currency does not meet the maximum limit.|
 | 10074 | The payeeId is not available.|
-| 40000 | Payment timeout. |
+| 40000 | Payment deadline or confirmation deadline exceeded. |
 | 40001 | The payee does not exist in the url. |
 | 40002 | The asset in url does not exist or does not support exchanging. |
 | 40003 | The transfer amount exceeds 1000 USDT. |
@@ -92,10 +128,10 @@ Global error response, example:
 | 40017 | The Withdrawal amount is too small. |
 | 40018 | Transfer amount is too small. |
 | 40019 | Transfer amount is too large. |
-| 40020 | Wrong payment assets. |
+| 40020 | Wrong payment asset. |
 | 40021 | Double payment. |
 | 40022 | TraceId does not exist. |
 | 40023 | Payee does not exist in Memo. |
-| 40024 | Wrong Amount paid. |
+| 40024 | Payment deadline passed with an insufficient amount. |
 | 40025 | Too much market volatility.|
 | 40027 | Your payment fails due to transaction restrictions on settlement assets. |

@@ -1,6 +1,16 @@
-# Payments Results
+# Payment Result
 
-MixPay API for getting a payment results.
+Use this endpoint to retrieve the authoritative server-side result for an order. See [Payment Lifecycle](/api/payments/payment-lifecycle) for status definitions, deadline behavior, and underpayment handling.
+
+:::warning Final states determine the order outcome
+Always base the final merchant action on the latest `data.status` returned by this endpoint:
+
+- `success` is the only successful final state. Verify the returned order fields, then fulfill exactly once.
+- `failed` is the only failed final state. Stop accepting payment for the trace, do not fulfill, and inspect `failureCode` and `failureReason`.
+- `unpaid`, `confirming`, `paid_less`, `pending`, and `auditing` are intermediate states. Keep the order open and query again. In particular, `pending` does **not** mean that the merchant order has been paid successfully.
+
+Do not finalize an order from an intermediate status, callback event, redirect, local countdown, or `expiredAt` alone. Once the result reaches `success` or `failed`, that terminal outcome cannot be reopened by another payment attempt on the same `traceId`.
+:::
 
 ## GET /payments_result
 
@@ -13,19 +23,19 @@ For security best practice, you **should not** trust the client side application
 
 ## Endpoint URL
 
-```bash
+```text
 https://api.mixpay.me/v1/payments_result
 ```
 
-## Parameters
+### Parameters
 
-|  Param | Optional | Type | Description |
+| Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
-| `traceId` | <span class="required">*required</span> if no `orderId` | String | Trace Id of payments. |
-| `orderId` | <span class="required">*required</span> if no `traceId` | String | Unique in your system. String lengths **between 6-36** must be letters, numbers, dashes and underscores and NOT space. |
-| `payeeId` | <span class="required">*required</span> if has `orderId` | String | Account ID for receiving crypto, pls see [Five types of account](/guides/getting-started#account) and [How to get payeeId](/guides/getting-started#payee-id). |
-| `with=payment` | optional | String | Return with the relative payment object. |
-| `with=transactions` | optional | String | Return with the relative transaction objects.  |
+| `traceId` | Required if `orderId` is omitted | String | The authoritative order-level payment identifier. |
+| `orderId` | Required if `traceId` is omitted | String | Your merchant order identifier. It must contain 6-36 letters, numbers, dashes, or underscores, with no spaces. |
+| `payeeId` | Required with `orderId` | String | The account receiving the payment. See [How to get a payeeId](/guides/getting-started#payee-id). |
+| `clientId` | Optional | String | Retained for request compatibility. It does not select a separate order result and may be ignored. |
+| `with` | Optional | String | Comma-separated related objects. Supported values are `payment` and `transactions`. |
 
 :::info
 If you just want to check if the payment is paid or not, Normally, you don't need the `with` parameter, checking the `data.status` is `success` is enough. The `with` parameter only if you need extra info about the payment. 
@@ -33,15 +43,17 @@ If you just want to check if the payment is paid or not, Normally, you don't nee
 If you want `transactions` and `payment`, you can pass it like `with=payment,transactions` in the URI.
 :::
 
-## Example request - GET payment results.
+### Example request
 
-```json
-curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
--d "traceId"="8e69e534-d0c4-3e04-8b61-37a73cd9e7d7"
+```bash
+curl -G https://api.mixpay.me/v1/payments_result \
+  --data-urlencode "traceId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7" \
+  --data-urlencode "with=payment,transactions"
 ```
 
+### Example response
+
 ```json
-// title: Response
 {
     "code": 0,
     "success": true,
@@ -144,9 +156,32 @@ curl -i -X GET -G https://api.mixpay.me/v1/payments_result \
 }
 ```
 
-:::info
-This response status returns `unpaid`, `pending`(processing), `failed`, `auditing` and `success`.
-:::
+
+## Status handling
+
+The possible statuses are `unpaid`, `confirming`, `paid_less`, `pending`, `auditing`, `success`, and `failed`. Use the terminal state—not an earlier intermediate state—as the final order outcome.
+
+| Status group | Terminal | Required merchant handling |
+| --- | --- | --- |
+| `unpaid`, `confirming`, `paid_less`, `pending`, `auditing` | No | Record or display progress, keep the order open, and query again. Do not fulfill or finalize failure. For `paid_less`, offer a top-up using the original order and `traceId`. |
+| `success` | **Yes—successful** | Verify `traceId`, `payeeId`, `quoteAmount`, and `quoteAssetId`, then fulfill idempotently. |
+| `failed` | **Yes—failed** | Stop accepting payment for the trace, do not fulfill, and inspect `failureCode` and `failureReason`. Handle any refund as a separate process. |
+
+Continue querying while the result is non-terminal. Do not infer failure from `expiredAt` alone: a payment recognized in full before the deadline can remain `confirming` after that time while MixPay waits for blockchain confirmations.
+
+## Handling terminal results safely
+
+Never change the final merchant order outcome from browser state, a redirect, an iframe message, or a callback body alone. Query this endpoint from your server and require all of the following:
+
+1. The API response itself has `success === true`.
+2. `data.status` is terminal: `success` or `failed`. If it is anything else, keep the order open.
+3. `data.traceId` matches the immutable trace stored for the order. If you query with `orderId` and `payeeId`, still bind and verify the returned trace.
+4. `data.payeeId` is the intended receiving account.
+5. `data.quoteAmount` and `data.quoteAssetId` match the expected order using decimal-safe amount comparison.
+6. The corresponding terminal business transition has not already been applied.
+
+Apply the identity checks before recording either terminal outcome. A `failed` result must never reach the fulfillment path, and a `success` result must be fulfilled idempotently.
+
 
 ## Checking for success payment
 
@@ -158,14 +193,14 @@ quoteAmount —— The amount you want user to pay;
 quoteAssetId —— Currency of your choice.
 ```
 
+
 Here is the example code in PHP:
 
 ```php
-// Get the order from database
-$order = Order::find($order_id);
 
-// Get the payment result from MixPay `payments_result` API
-$payment_result = getMixPayResult($order->id)
+// Get the order from your database
+$order = Order::findOrFail($orderId);
+$result = getMixPayResult($order->id)
 
 if ($payment_result["success"]) {
 
@@ -194,22 +229,18 @@ if ($payment_result["success"]) {
 }
 ```
 
-:::warning
-**Security note: You have to check `payeeId`, `quoteAssetId` and `quoteAmount` to make sure a payment is paid successfully. **
-:::
+!!!Important: See [Security Guidelines](/guides/security-guidelines) for the complete checklist.
 
+## Failure codes
 
-> Please checkout the [Security Guidelines](/guides/security-guidelines).
+`failureCode` is returned as a string. A non-failed result normally uses `"0"`.
 
-## Checking for failure
+| Code | Meaning |
+| --- | --- |
+| `40000` | No valid payment was received before the payment deadline, or a fully recognized payment did not obtain the required confirmations before the server-side confirmation deadline. |
+| `40020` | A wrong payment asset was received and the payment cannot be corrected. |
+| `40024` | The payment deadline passed while the recognized amount was insufficient. |
+| `40032` | The payment was cancelled. |
+| `10095` | The payment was rejected during review. |
 
-You can use the `failureCode` and `failureReason` to check the result, their possible values are:
-
-```json
-'40000' => 'Payment overtime',
-'40020' => 'Wrong asset paid',
-'40021' => 'Double payment',
-'40024' => 'Wrong Amount paid',
-'40025' => 'Too much market volatility.',
-...
-```
+The failure reason is informational and may change. Branch on `failureCode`, not on the English text. A failed result does not by itself mean that a refund has completed.

@@ -33,9 +33,9 @@ When a customer makes a purchase, on your App check-out page, show a "Pay with C
 
 4. When the customer finishes paying crypto ( depending on what cryptocurrency the customer chooses to pay, the delay varies from 5 seconds to 30mins or more), showing a "Waiting Payment Processing" hint to the customer;
 
-5. In the meantime, the App client uses the `orderId` to call [payments-results API](/api/payments/payments-results) for checking payment results. Or using the [Payment Callback](/api/payments/payment-callback) on your server side.
+5. In the meantime, your merchant server polls the [Payment Result API](/api/payments/payments-results) or receives a [Payment Callback](/api/payments/payment-callback). The App should query your backend, not call MixPay directly to decide fulfillment.
 
-6. It's recommended to make the Payments Results API call every two seconds.
+6. Choose a polling interval appropriate for your application and rate limits, and stop only when the server observes `success` or `failed`.
 
 
 ### Pay with Mixin wallet 
@@ -81,81 +81,33 @@ You can reference the following UI to construct your App View:
 
 ## Expiration
 
+Raw API responses expose two different time concepts:
 
+| Field | Meaning |
+| --- | --- |
+| `expire` / `seconds` | Current quote or payment-address refresh window. A refreshed instruction can change `paymentAmount` or payment details. |
+| `payments_result.expiredAt` | Fixed payment deadline of the overall order. A refresh does not extend it. |
 
-There are two kinds of expiration on creating a MixPay payment.
+`expiredTimestamp` sets an absolute upper bound for the payment deadline. Omitting it does not make the payment valid indefinitely because MixPay and the selected payment method can impose earlier limits. Proxy-payment methods, including BTC Lightning, have a maximum effective payment window of 60 minutes.
 
+Transactions first recognized after the payment deadline cannot complete the original order. If the full amount is recognized before that deadline, blockchain confirmation may continue after `expiredAt` until MixPay's separate confirmation deadline.
 
+When the quote or address refresh window ends, request the latest payment information only while the order remains non-terminal. Do not reuse a `traceId` after `success` or `failed`, and never assume that a refreshed quote extends the overall order deadline.
 
-### 1. Payment expired (closed)
-
-
-
-In online shopping flow, sometimes you have this business logic - when your order expired, you need to release the inventory.
-
-
-
-You can provide the `expiredTimestamp` parameter, to keep the MixPay payment in sync with your order expiration time.
-
-
-
-When MixPay payment expired, the user will not be able to able to pay. (You need to construct the UI on your side.)
-
-
-
-If you leave `expiredTimestamp` parameter empty, this payment will be valid.
-
-
-
-### 2. Tolerate period expired (refresh needed)
-
-
-
-If the customer's payment asset is different than the settlement assets, let's say the payment asset is BTC and the settlement asset is ETH. MixPay will convert BTC to ETH internally for the merchants. 
-
-
-
-But due to the risk of crypto price fluctuations,  for example, if the customer is finishing the payment after 24 hours, and the BTC price drops from $25000 to $22000.
-
-
-
-So we need to set a reasonable expiration time, otherwise, we may suffer tremendous loss. This expiration time we call it "tolerate period". 
-
-
-
-"tolerate period" is defined internally. When creating a payment, will have there two fields in the response: 
-
-
-
-```bash
-// Unit Timestamp for accuracy
-"expire":1659340995,
-
-// A little helper for setting up the countdown
-"seconds":60,
-```
-
-
-
-When the "tolerate period" is expired, you **must** request the create payment API with the same parameters. MixPay will recalculate the `paymentAmount` .  
-
-
-
-:::warning
-
-If a customer pays with a "tolerate period" expired payment, if is "Pay with Mixin wallet", the crypto assets will refund, and the payment result will be `payment overtime`. If is "Pay using an on-chain Wallet", due to the crypto transfer's nature, we can not refund the money directly, we must get the customer's wallet address first, in this scenario, you can instruct the customer to [contact our customer service](https://help.mixpay.me/en/articles/6836092-how-to-contact-customer-service). 
-
-:::
+Late or invalid payments can require an automatic refund or manual review depending on the payment method and failure reason. A `failed` payment result is not proof that a refund has completed.
 
 
 
 ## Getting the result
 
-At this point, customers are paying crypto using our Paylink; how can you get the paying results?
-
-On your server side, you can loop through the [payments-results API](/api/payments/payments-results) using `orderId` + `payeeId`.
 
 It's recommended to implement the [Payment Callback](/api/payments/payment-callback) flow, for better performance.
+
+Poll the [Payment Result API](/api/payments/payments-results) from your server using `traceId`, or use `orderId` together with `payeeId`. 
+
+> Tip: Poll the Payment Result API can easily hit our API rate limit. For better performance and stable use, always using the [Payment Callback](/api/payments/payment-callback) flow.
+
+Only `success` and `failed` are terminal. Keep `unpaid`, `confirming`, `paid_less`, `pending`, and `auditing` open. Fulfill only after your server verifies a `success` result and the expected payee, quote asset, and amount.
 
 
 ## Multi-payment (pay less)
@@ -166,23 +118,18 @@ However, if you are using the [Raw API](/guides/using-raw-api) to build your own
 
 To support multiple payments, you need to perform the following steps.
 
-When calling the [payments-results API](/api/payments/payments-results):
+When calling the [Payment Result API](/api/payments/payments-results):
 
-1. Use the `with` parameter with the value `payment,transactions` in the URI to retrieve the `payment` and `transactions` objects.
-2. Check the value of `data.payment.isFullyPaid`. If it is true, the payment has been fully paid; otherwise, it is false.
-   - If it is true, check if `data.status` is `success` to determine if the order is successful. If it is `pending`, it means the transactions are waiting for block confirmation.
-3. If the value of `data.payment.isFullyPaid` is false, subtract `data.payment.totalTransactionsAmount` from `data.payableAmount` to determine the remaining amount the user needs to pay.
+1. Request `with=payment,transactions`.
+2. Use `data.status === "paid_less"` as the primary underpayment signal. Integrations created before `paid_less` was introduced may retain `data.status === "pending" && data.payment.isFullyPaid === false` as a compatibility fallback.
+3. Calculate `remainingAmount = max(data.payableAmount - data.paymentAmount, 0)` using decimal-safe arithmetic. The top-level `paymentAmount` is the authoritative amount recognized for the order; do not derive it by summing unfiltered transaction rows.
+4. Retrieve the latest payment instructions and ask the payer to send the remaining amount using the same payment asset, destination, merchant order, and `traceId`.
+5. Continue polling. `confirming` means recognized transactions still need confirmations; `pending` means MixPay has accepted the payment as fully paid and the confirmation requirements are satisfied while order processing continues.
 
-:::info
-Users have only 10 minutes to complete the payment (from the time MixPay receives the broadcast transaction).
-For multiple payments, the subsequent payment time may be reduced. 
-
-You need call the [refresh onchain payment API](/api/payments/refresh-onchain-payments) to refresh the payment time.
-Please note that each time you call the [refresh onchain payment API](/api/payments/refresh-onchain-payments), the payment time will be updated, and the `data.payableAmount` will be also updated accordingly.
-:::
+Do not create a new merchant order for the remaining amount. A refreshed instruction cannot extend `payments_result.expiredAt`, and a terminal trace cannot be refreshed into a new payment.
 
 Q: If a user makes multiple payments exceeding the order amount, will the payment be successful?
-A: Yes, it will be successful. In this case, check if `data.surplusStatus` is `yes`. The amount to be refunded is `data.surplusAmount`. Please refer to the MixPay Checkout Page for the specific refund process.
+A: An overpayment can still complete successfully. Check whether `data.surplusAmount` is greater than zero, then track `data.surplusStatus` (`no`, `pending`, `sending`, `success`, or `expired`) separately. Payment success does not mean that a surplus refund is complete.
 
 Q: Can other payment methods (Mixin, Binance) support multiple payments?
 A: No. Only on-chain transfers support multiple payments.

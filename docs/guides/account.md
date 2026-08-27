@@ -18,7 +18,7 @@ If you don't know how to choose, you can go with the "User account", or [contact
 
 There are three ways of getting the payee's UUID: 
 
-* After logging into the [Dashboard]((https://dashboard.mixpay.me/)), you can find the UUID in the [settings](https://dashboard.mixpay.me/settings).
+* After logging into the [Dashboard](https://dashboard.mixpay.me/), you can find the UUID in the [settings](https://dashboard.mixpay.me/settings).
 
 - You can use this bot (7000101422) to get the Mixin User/Robot UUID, send the Mixin ID in the chat window to the bot, and it will reply with the corresponding UUID. It's simple, and no programming is required.
 

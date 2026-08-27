@@ -79,7 +79,7 @@ https://mixpay.me/pay?payeeId=8e69e534-d0c4-3e04-8b61-37a73cd9e7d7&settlementAss
 
 ### Step 3 - Look query the payment results
 
-Then you can use this [API](/api/payments/payments-results) to loop query payment results. The parameter is the `traceId` you generated. And the response is the `status` of payment. The `status` has three parameters, unpaid, failed, and success.
+Query [`GET /payments_result`](/api/payments/payments-results) from your server using `traceId` and handle every status in the [Payment Lifecycle](/api/payments/payment-lifecycle). Fulfill or release the guaranteed-trade step only after verifying `status === "success"` together with the expected payee, quote asset, and amount.
 
 ### Step 4 - Guaranteed trades based on Mixin's multi-signature API
 
