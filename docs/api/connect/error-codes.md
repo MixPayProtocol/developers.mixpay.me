@@ -71,15 +71,19 @@ The API response `message` is intended for diagnostics and can change. Branch on
 
 ## Payment-result failure codes
 
-When [`payments_result`](/api/payments/payments-results) returns `data.status === "failed"`, inspect these values:
+For current order-level failures, [`payments_result`](/api/payments/payments-results) returns one of these values when `data.status === "failed"`:
 
 | `failureCode` | Meaning |
 | :-- | :-- |
 | `40000` | No valid payment was received before the payment deadline, or a fully recognized payment did not obtain the required confirmations before the server-side confirmation deadline. |
 | `40020` | A wrong payment asset was received and the payment cannot be corrected. |
 | `40024` | The payment deadline passed while the recognized amount was insufficient. |
+| `40025` | The payment could not be completed because market-volatility or settlement-loss checks failed. |
+| `40027` | The payment could not be completed because the requested settlement asset was restricted or unavailable under strict settlement requirements. |
 | `40032` | The payment was cancelled. |
 | `10095` | The payment was rejected during risk, compliance, or manual review. |
+
+Historical and refund-derived records can expose additional compatibility values. See the complete [Failure codes](/api/payments/payments-results#failure-codes) section, including its unknown-code fallback guidance.
 
 :::warning Cancellation codes
 For payment cancellation, `10032` and `40032` describe different stages. `10032` is the immediate API error returned when cancellation is not allowed. `40032` is the payment-result failure code after a cancellation is accepted and the order reaches `failed`.

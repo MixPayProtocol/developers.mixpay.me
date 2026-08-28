@@ -85,35 +85,33 @@ If you need callback events for more scenarios, you can contact us to discuss de
 
 ## Checking for paid_less
 
-When calling the  [payments-results API](/api/payments/payments-results), with a URL query `with=payment`, will return the `payment` object like the following:
+Underpayment is represented directly by the Payment Result `data.status`:
 
-```
+```json
 {
   "code": 0,
   "success": true,
   "message": "",
   "data": {
-    "status": "pending",
-    .
-    .
-    .
-    "payment":{
-        "isMultiPay":true,
-        "isFullyPaid":false,
-        ...
-    }
+    "status": "paid_less",
+    "paymentAmount": "8.5",
+    "payableAmount": "10",
+    "payableSymbol": "USDT",
+    "traceId": "8e69e534-d0c4-3e04-8b61-37a73cd9e7d7"
   }
 }
 ```
 
-If the following conditions are meet: 
+Use `data.status === "paid_less"` as the primary and sufficient signal that the payment is underpaid. You do not need to request `with=payment` or check `payment.isMultiPay` and `payment.isFullyPaid`. Subscribing to the `paid_less` callback event is optional; polling the [payments-results API](/api/payments/payments-results) can detect the same status.
 
-- `data.status` is equal to `pending`;
-- and `data.payament.isMultiPay` is equals to `true`;
-- and `isFullyPaid` equals `false`.
+When `data.status` is `paid_less`:
 
-Then is a user pays less than required, you can perform the specific action, like send a reminder email to inform them to pay the remaining balance.
+1. Keep the merchant order open. Do not fulfill it or mark it as failed.
+2. Calculate the remaining amount as `max(payableAmount - paymentAmount, 0)` using decimal-safe arithmetic.
+3. Retrieve the latest payment information and provide the payer with the current asset, amount, destination, and Tag/Memo.
+4. Reuse the original merchant order, `traceId`, and existing `clientId` payment channel. Do not create a separate order for the top-up.
+5. Continue querying the payment result until its status becomes `success` or `failed`.
 
-:::info
-If you using [one time payment](/api/payments/one-time-payment), just passing the original payment link for user to pay the remaining amount.
-:::
+For legacy records created before the explicit `paid_less` status was introduced, you may retain `data.status === "pending" && payment.isFullyPaid === false` only as a backward-compatibility fallback. New payments should use `data.status === "paid_less"`.
+
+See [Payment Lifecycle: Completing an underpayment](/api/payments/payment-lifecycle#completing-an-underpayment) for the complete top-up flow.
